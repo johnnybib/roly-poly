@@ -46,6 +46,10 @@ public class PlayerAbilities : MonoBehaviour
         {
             return new DribbleState(p, abilities.dribble.ability);
         }
+        else if(p.inputs.boostBall && abilities.boostBall.unlocked && p.physics.IsRoll())
+        {
+            return new BoostBallState(p, abilities.boostBall.ability);
+        }
         return null;
     }
 

@@ -7,7 +7,6 @@ public abstract class ActionableState : PlayerState
     public ActionableState(PlayerController p, StateID stateID) : base(p, stateID){ }
     public override PlayerState HandleInput()
     {
-        p.CheckFlip(p.inputs.horz);
         if(p.inputs.switchMode)
         {
             p.animations.ResetRotation();

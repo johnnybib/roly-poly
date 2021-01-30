@@ -7,6 +7,7 @@ public class WalkingState : ActionableState
     public WalkingState(PlayerController p) : base(p, StateID.Walking) { }
     public override PlayerState Update()
     {
+        p.CheckFlip(p.inputs.horz);
         if (p.IsInputHorz())
         {
             p.physics.Walk(p.inputs.horz);

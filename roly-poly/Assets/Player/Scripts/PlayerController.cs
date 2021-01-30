@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
         public float horz;
         public float vert;
         public bool dribble;
+        public bool boostBall;
+        public bool releaseBoostBall;
         public bool switchMode;
     }
     public Inputs inputs;
@@ -43,10 +45,16 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        state = new IdleState(this);        
         abilities.SetPlayerController(this);
         abilities.UnlockAll();
+        state = new IdleState(this);
+        stateID = state.GetStateID();
+        pause = false;
     }    
+    void Start()
+    {
+        state.StateEnter();
+    }
 
     public void CheckNewState(PlayerState newState)
     {
@@ -57,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeState(PlayerState newState)
     {
+        Debug.Log(string.Format("state {0} to {1}", state.GetStateID(), newState.GetStateID()));
         state.StateExit();
         state = newState;
         stateID = state.GetStateID();//For debugging purposes
@@ -71,17 +80,9 @@ public class PlayerController : MonoBehaviour
             model.transform.localRotation = physics.rb.transform.localRotation;
         if(!pause)
         {
-
+            animations.ClearAnimTriggers();
             CheckNewState(state.Update());
             ClearInputs();
-        }
-    }
-    
-    void Update()
-    {
-        if (!pause)
-        {
-            animations.ClearAnimTriggers();
             StartNextAnim();
         }
     }
@@ -105,6 +106,8 @@ public class PlayerController : MonoBehaviour
         inputs.vert = 0;
         inputs.dribble = false;
         inputs.switchMode = false;
+        inputs.boostBall = false;
+        inputs.releaseBoostBall = false;
     }
 
 
@@ -121,15 +124,12 @@ public class PlayerController : MonoBehaviour
     {
         if (nextAnim.name != null )
         {
-            Debug.Log("Start " + this.nextAnim.name);
+            // Debug.Log("Start " + this.nextAnim.name);
             animations.Play(nextAnim.name);
         }
         nextAnim.name = null;
         nextAnim.priority = 0;
     }
-
-
-
 
 
     #region Input Handling
@@ -149,6 +149,18 @@ public class PlayerController : MonoBehaviour
     public void OnDribble()
     {
         inputs.dribble = true;
+        HandleInput();
+    }
+
+    public void OnBoostBall()
+    {
+        inputs.boostBall = true;
+        HandleInput();
+    }
+
+    public void OnReleaseBoostBall(float duration)
+    {
+        inputs.releaseBoostBall = true;
         HandleInput();
     }
 

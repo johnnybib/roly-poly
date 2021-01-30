@@ -9,6 +9,7 @@ public class RollingState : ActionableState
 
     public override PlayerState Update()
     {
+        p.CheckFlip(Mathf.Sign(p.physics.rb.velocity.x));
         if (p.IsInputHorz())
         {
             p.physics.Roll(p.inputs.horz);

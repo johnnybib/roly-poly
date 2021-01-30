@@ -22,25 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "W",
-                    "type": "Button",
-                    "id": "ba61b3b0-fde9-4175-b097-96ed1258bab4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "S",
-                    "type": "Button",
-                    "id": "ef7a528a-4308-4b68-9f8b-03ae29105f3b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Shift",
                     "type": "Button",
                     "id": "f4c7c5bb-da95-44cd-a225-4acfea855f1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "J",
+                    "type": "Button",
+                    "id": "01348841-a7c3-4dcd-8880-7888d172d139",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -93,34 +85,23 @@
                 },
                 {
                     "name": "",
-                    "id": "dc7483a1-1541-4974-9bb8-02fdd9a93f2c",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "W",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8db949f3-e70f-471c-bf67-5724791b0560",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "S",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8d5e3ba4-4bae-4233-852b-09861800c2c6",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Shift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "718dc99a-7201-4344-9b81-21dfe66f3519",
+                    "path": "<Keyboard>/j",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "J",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
