@@ -16,10 +16,6 @@ public class GameEndController : GameStateController
     public override void Enter()
     {
         this.gameObject.SetActive(true);
-        if (SaveSystem.DoesSaveFileExist())
-        {
-            // Set load button to false
-        }
     }
     public override void Exit()
     {
@@ -33,4 +29,14 @@ public class GameEndController : GameStateController
         gameManager.gameStates.MainMenu.OnExit.RemoveListener(Exit);
     }
     #endregion GameState methods
+
+    void Start()
+    {
+        OnGameEndLoaded(this);
+    }
+
+    public void ToMainMenu()
+    {
+        gameManager.ExitGameEnd();
+    }
 }

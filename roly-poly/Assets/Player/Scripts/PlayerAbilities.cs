@@ -6,27 +6,32 @@ public class PlayerAbilities : MonoBehaviour
 {
     private PlayerController p;
     [System.Serializable]
-    public struct DribbleAbility {
+    public struct DribbleAbility
+    {
         public bool unlocked;
         public Dribble ability;
     }
     [System.Serializable]
-    public struct StickyFeetAbility {
+    public struct StickyFeetAbility
+    {
         public bool unlocked;
         public StickyFeet ability;
     }
     [System.Serializable]
-    public struct BoostBallAbility {
+    public struct BoostBallAbility
+    {
         public bool unlocked;
         public BoostBall ability;
     }
     [System.Serializable]
-    public struct BugBlastAbility {
+    public struct BugBlastAbility
+    {
         public bool unlocked;
         public BugBlast ability;
     }
     [System.Serializable]
-    public struct Abilities {
+    public struct Abilities
+    {
         public DribbleAbility dribble;
         public StickyFeetAbility stickyFeet;
         public BoostBallAbility boostBall;
@@ -42,11 +47,11 @@ public class PlayerAbilities : MonoBehaviour
 
     public PlayerState CheckAbilities()
     {
-        if(p.inputs.dribble && abilities.dribble.unlocked && p.physics.IsRoll())
+        if (p.inputs.dribble && abilities.dribble.unlocked && p.physics.IsRoll())
         {
             return new DribbleState(p, abilities.dribble.ability);
         }
-        else if(p.inputs.boostBall && abilities.boostBall.unlocked && p.physics.IsRoll())
+        else if (p.inputs.boostBall && abilities.boostBall.unlocked && p.physics.IsRoll())
         {
             return new BoostBallState(p, abilities.boostBall.ability);
         }
@@ -68,5 +73,4 @@ public class PlayerAbilities : MonoBehaviour
         abilities.bugBlast.unlocked = false;
 
     }
-    
 }

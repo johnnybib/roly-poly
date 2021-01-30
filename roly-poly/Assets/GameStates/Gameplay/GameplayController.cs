@@ -20,10 +20,11 @@ public class GameplayController : GameStateController
         {
             Unpause();
         }
+        PlayerController.PlayerPressedStartEvent -= PlayerPressedStartHandler;
     }
     public override void Enter()
     {
-        gameManager.playerController.transform.position = defaultSpawnPosition.position;
+        ResetPlayer();
     }
     public override void Exit()
     {
@@ -39,6 +40,7 @@ public class GameplayController : GameStateController
     void Awake()
     {
         PlayerController.PlayerPressedStartEvent += PlayerPressedStartHandler;
+        pauseUI.SetActive(false);
     }
 
     void Start()
@@ -56,12 +58,10 @@ public class GameplayController : GameStateController
         //UISfx.Instance.PlayBack();
         if (paused)
         {
-            pauseUI.SetActive(false);
             Unpause();
         }
         else
         {
-            pauseUI.SetActive(true);
             Pause();
         }
     }
@@ -69,10 +69,8 @@ public class GameplayController : GameStateController
     public void Pause()
     {
         //gameCamera.movementEnabled = false;//Stops camera shake when paused
-        // foreach(PlayerController p in playerControllers.Values)
-        // {
-        //     p.Pause();
-        // }
+        pauseUI.SetActive(true);
+        gameManager.playerController.SetPause(true);
         Time.timeScale = 0;
         paused = true;
     }
@@ -81,11 +79,54 @@ public class GameplayController : GameStateController
     public void Unpause()
     {
         // gameCamera.movementEnabled = true;
-        // foreach(PlayerController p in playerControllers.Values)
-        // {
-        //     p.Unpause();
-        // }
+        pauseUI.SetActive(false);
+        gameManager.playerController.SetPause(false);
         Time.timeScale = 1;
         paused = false;
+    }
+
+    public void SaveAndQuit()
+    {
+        Debug.Log("Save and quit!");
+        Save();
+        gameManager.EndGameplay();
+    }
+
+    public void Save()
+    {
+        Debug.Log("Saving...");
+        SaveData saveData = new SaveData();
+        saveData.dribbleUnlock = gameManager.playerController.abilities.abilities.dribble.unlocked;
+        saveData.stickyFeetUnlock = gameManager.playerController.abilities.abilities.stickyFeet.unlocked;
+        saveData.boostBallUnlock = gameManager.playerController.abilities.abilities.boostBall.unlocked;
+        saveData.bugBlastUnlock = gameManager.playerController.abilities.abilities.bugBlast.unlocked;
+        SaveSystem.SaveFile(saveData);
+        Debug.Log("Saved!");
+    }
+
+    public void Win()
+    {
+        Debug.Log("You Win!");
+        gameManager.EndGameplay(true);
+    }
+
+    public void ResetPlayer()
+    {
+        gameManager.playerController.transform.position = defaultSpawnPosition.position;
+
+        if (gameManager.loadGameplayWithSaveData)
+        {
+            Debug.Log("Loading from saved data");
+            SaveData saveData = SaveSystem.LoadFile();
+            if (saveData != null)
+            {
+                gameManager.playerController.abilities.abilities.dribble.unlocked = saveData.dribbleUnlock;
+                gameManager.playerController.abilities.abilities.stickyFeet.unlocked = saveData.stickyFeetUnlock;
+                gameManager.playerController.abilities.abilities.boostBall.unlocked = saveData.boostBallUnlock;
+                gameManager.playerController.abilities.abilities.bugBlast.unlocked = saveData.bugBlastUnlock;
+
+            }
+        }
+
     }
 }

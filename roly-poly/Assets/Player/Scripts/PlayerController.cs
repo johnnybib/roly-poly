@@ -160,7 +160,6 @@ public class PlayerController : MonoBehaviour
     public void OnSwitchMode()
     {
         inputs.switchMode = true;
-        Debug.Log("Swithc");
         HandleInput();
     }
 

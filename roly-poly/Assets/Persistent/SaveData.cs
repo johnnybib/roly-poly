@@ -6,5 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public bool ability1;
+    public bool dribbleUnlock;
+    public bool stickyFeetUnlock;
+    public bool boostBallUnlock;
+    public bool bugBlastUnlock;
 }

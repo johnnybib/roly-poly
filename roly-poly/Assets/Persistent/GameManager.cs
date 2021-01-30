@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     public GameStates gameStates;
     public string currentStateName;
-    private GameState stateOnSceneLoad;
     private GameState currentState;
 
     #endregion GameState
@@ -50,7 +49,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PlayerController playerController;
     public GameObject playerPrefab;
-    private bool loadGameplayWithSaveData = false;
+    [HideInInspector]
+    public bool loadGameplayWithSaveData = false;
 
     void Awake()
     {
@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         gameStates = new GameStates();
-        stateOnSceneLoad = gameStates.MainMenu;
 
         loadingScreen.SetActive(false);
         pp.SetCanInput(false);
@@ -92,11 +91,6 @@ public class GameManager : MonoBehaviour
         pp.SetPlayerController(playerController);
         pp.SetCanInput(true);
 
-        if (loadGameplayWithSaveData)
-        {
-            Debug.Log("Loading from saved data");
-        }
-
         gpc.SetGameManager(this);
         gpc.SetupEventListeners();
         currentState.OnEnter.Invoke();
@@ -109,7 +103,7 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == "MainMenu")
         {
-            SetCurrentState(stateOnSceneLoad);
+            SetCurrentState(gameStates.MainMenu);
         }
     }
     #endregion
@@ -126,17 +120,28 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void EndGameplay()
+    public void EndGameplay(bool didWin = false)
     {
-        // End or main menu
+        currentState.OnExit.Invoke();
+
         pp.SetCanInput(false);
-        //LoadScene("GameEnd");
-        //LoadScene("MainMenu");
+        if (didWin)
+        {
+            SetCurrentState(gameStates.End);
+            LoadScene("GameEnd");
+        }
+        else
+        {
+            SetCurrentState(gameStates.MainMenu);
+            LoadScene("MainMenu");
+        }
     }
 
-    public void QuitEndGame()
+    public void ExitGameEnd()
     {
-        //LoadScene("MainMenu");
+        currentState.OnExit.Invoke();
+        SetCurrentState(gameStates.MainMenu);
+        LoadScene("MainMenu");
     }
 
     public void SetCurrentState(GameState newState)
