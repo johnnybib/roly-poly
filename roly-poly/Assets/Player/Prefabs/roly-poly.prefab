@@ -96,14 +96,6 @@ MonoBehaviour:
     m_ActionId: c4ea520f-d3ef-46d0-99b7-a7654bf91daa
     m_ActionName: Gameplay/Space[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ba61b3b0-fde9-4175-b097-96ed1258bab4
-    m_ActionName: Gameplay/New action
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ef7a528a-4308-4b68-9f8b-03ae29105f3b
-    m_ActionName: Gameplay/New action
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7549147420423112194}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
@@ -120,9 +112,21 @@ MonoBehaviour:
     m_ActionId: f4c7c5bb-da95-44cd-a225-4acfea855f1a
     m_ActionName: Gameplay/Shift[/Keyboard/shift]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d7eaf5cb-005d-497c-9184-997895c43b3f
-    m_ActionName: Gameplay/Start[/Keyboard/escape,/Keyboard/enter]
+      m_Calls:
+      - m_Target: {fileID: 7549147420423112194}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnWest
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 01348841-a7c3-4dcd-8880-7888d172d139
+    m_ActionName: Gameplay/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -292,10 +296,34 @@ MonoBehaviour:
   WestAny:
     pressEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7549147420423112192}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: OnBoostBall
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     releaseEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7549147420423112192}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: OnReleaseBoostBall
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   WestCenter:
     pressEvent:
       m_PersistentCalls:
@@ -400,7 +428,7 @@ MonoBehaviour:
       ability: {fileID: 0}
     boostBall:
       unlocked: 0
-      ability: {fileID: 0}
+      ability: {fileID: 11400000, guid: b736aba8a496acf4095bba87620f0b49, type: 2}
     bugBlast:
       unlocked: 0
       ability: {fileID: 0}

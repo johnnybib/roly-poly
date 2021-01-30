@@ -152,6 +152,11 @@ public class PlayerPhysics : MonoBehaviour
     {
         rb.AddForce(Vector2.down * force);
     }
+
+    public void BoostBall(float boostForce)
+    {       
+        rb.AddForce(Vector2.right * boostForce * GetFacingDir());
+    }
     #endregion
 
 

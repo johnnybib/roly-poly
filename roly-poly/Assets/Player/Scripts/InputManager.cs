@@ -21,10 +21,10 @@ public class InputManager : MonoBehaviour
 
     [System.Serializable]
     // The parameter value is not actually used. The float is used as a placeholder for a new parameter in the future.
-    public class ButtonPressEvent : UnityEvent<ButtonInput, float> { }
+    public class ButtonPressEvent : UnityEvent<float> { }
 
     [System.Serializable]
-    public class ButtonReleaseEvent : UnityEvent<ButtonInput, float> { }
+    public class ButtonReleaseEvent : UnityEvent<float> { }
 
     [System.Serializable]
     public struct ButtonEvent
@@ -272,33 +272,33 @@ public class InputManager : MonoBehaviour
         ButtonEvent newEvent;
         if (buttonMap.TryGetValue(comboNoStick, out newEvent))
         {
-            if (InvokeButtonEvents(newEvent, currentInputs.button, duration, isRelease)) return;
+            if (InvokeButtonEvents(newEvent, duration, isRelease)) return;
         }
         // Find function mapped at combo input
         ComboInput comboWithStick = new ComboInput(currentInputs.stickDir, currentInputs.button);
         if (buttonMap.TryGetValue(comboWithStick, out newEvent))
         {
-            if (InvokeButtonEvents(newEvent, currentInputs.button, duration, isRelease)) return;
+            if (InvokeButtonEvents(newEvent, duration, isRelease)) return;
         }
 
         // If no event is found, assume a center stick input. Otherwise return
         comboWithStick = new ComboInput(StickInput.Center, currentInputs.button);
         if (buttonMap.TryGetValue(comboWithStick, out newEvent))
         {
-            InvokeButtonEvents(newEvent, currentInputs.button, duration, isRelease);
+            InvokeButtonEvents(newEvent, duration, isRelease);
         }
     }
 
-    private bool InvokeButtonEvents(ButtonEvent newEvent, ButtonInput buttonPressed, float duration, bool isRelease)
+    private bool InvokeButtonEvents(ButtonEvent newEvent, float duration, bool isRelease)
     {
         if (newEvent.pressEvent.GetPersistentEventCount() != 0 && !isRelease)
         {
-            newEvent.pressEvent.Invoke(buttonPressed, duration);
+            newEvent.pressEvent.Invoke(duration);
             return true;
         }
         if (newEvent.releaseEvent.GetPersistentEventCount() != 0 && isRelease)
         {
-            newEvent.releaseEvent.Invoke(buttonPressed, duration);
+            newEvent.releaseEvent.Invoke(duration);
             return true;
         }
         return false;

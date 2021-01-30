@@ -32,7 +32,7 @@ public class PlayerAnimations : MonoBehaviour
 
     public void SetRollSpeed(float speed)
     {
-        anim.SetFloat("Speed", speed * rollSpeedMultiplier);
+        anim.SetFloat("Speed", -Mathf.Abs(speed) * rollSpeedMultiplier);
     }
     public void ClearAnimTriggers()
     {
