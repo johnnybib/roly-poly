@@ -1138,7 +1138,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2012028043}
         m_TargetAssemblyTypeName: PersistentPlayerGameplayInputs, Assembly-CSharp
-        m_MethodName: OnSouth
+        m_MethodName: OnSpace
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1150,38 +1150,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c4ea520f-d3ef-46d0-99b7-a7654bf91daa
     m_ActionName: Gameplay/South[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2012028043}
-        m_TargetAssemblyTypeName: PersistentPlayerGameplayInputs, Assembly-CSharp
-        m_MethodName: OnNorth
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ba61b3b0-fde9-4175-b097-96ed1258bab4
-    m_ActionName: Gameplay/W[/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2012028043}
-        m_TargetAssemblyTypeName: PersistentPlayerGameplayInputs, Assembly-CSharp
-        m_MethodName: OnSouth
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ef7a528a-4308-4b68-9f8b-03ae29105f3b
-    m_ActionName: Gameplay/S[/Keyboard/s]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2012028043}
@@ -1214,6 +1182,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d7eaf5cb-005d-497c-9184-997895c43b3f
     m_ActionName: Gameplay/Start[/Keyboard/escape,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 01348841-a7c3-4dcd-8880-7888d172d139
+    m_ActionName: Gameplay/J[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

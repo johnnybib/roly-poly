@@ -101,7 +101,6 @@ public class PlayerController : MonoBehaviour
         {
             animations.ClearAnimTriggers();
             CheckNewState(state.Update());
-            ClearInputs();
             StartNextAnim();
         }
     }
@@ -117,12 +116,11 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             CheckNewState(state.HandleInput());
+            ClearInputs();
         }
     }
     private void ClearInputs()
     {
-        inputs.horz = 0;
-        inputs.vert = 0;
         inputs.dribble = false;
         inputs.switchMode = false;
         inputs.boostBall = false;

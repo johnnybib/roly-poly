@@ -26,12 +26,7 @@ public class PersistentPlayerGameplayInputs : MonoBehaviour
         if (canInput)
             playerInputManager.OnHorizontal(context);
     }
-    public void OnNorth(InputAction.CallbackContext context)
-    {
-        if (canInput)
-            playerInputManager.OnNorth(context);
-    }
-    public void OnSouth(InputAction.CallbackContext context)
+    public void OnSpace(InputAction.CallbackContext context)
     {
         if (canInput)
             playerInputManager.OnSouth(context);
