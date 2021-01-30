@@ -114,12 +114,16 @@ MonoBehaviour:
   rollCollider: {fileID: 8939080908176968265}
   rollMat: {fileID: 6200000, guid: 0d73b8769e1d51648b08d52e995e4feb, type: 2}
   walkMat: {fileID: 6200000, guid: 3be28a5586ba1144bbd2fe5ddf5df8ef, type: 2}
-  xAccel: 2000
+  xAccelAerialRoll: 2700
+  xAccelGroundedRoll: 2700
+  xAccelAerialWalk: 500
+  xAccelGroundedWalk: 2500
   stopThreshold: 0.1
   walkFriction: 300
   rollFriction: 20
   maxMoveSpeedWalk: 1
   maxMoveSpeedRoll: 20
   switchBumpAmount: 400
-  raycastDist: 0.75
+  raycastDistRoll: 0.75
+  raycastDistWalk: 0.5
   isRoll: 0

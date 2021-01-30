@@ -27,6 +27,7 @@ public class PlayerAbilities : MonoBehaviour
     public struct BugBlastAbility
     {
         public bool unlocked;
+        public bool usedInAir;
         public BugBlast ability;
     }
     [System.Serializable]
@@ -44,7 +45,12 @@ public class PlayerAbilities : MonoBehaviour
     {
         this.p = p;
     }
+    public void Update()
+    {
+        if(p.physics.IsGrounded() && abilities.bugBlast.usedInAir)
+            abilities.bugBlast.usedInAir = false;
 
+    }
     public PlayerState CheckAbilities()
     {
         if (p.inputs.dribble && abilities.dribble.unlocked && p.physics.IsRoll())
@@ -54,6 +60,11 @@ public class PlayerAbilities : MonoBehaviour
         else if (p.inputs.boostBall && abilities.boostBall.unlocked && p.physics.IsRoll())
         {
             return new BoostBallState(p, abilities.boostBall.ability);
+        }
+        else if(p.inputs.bugBlast && abilities.bugBlast.unlocked && !abilities.bugBlast.usedInAir && !p.physics.IsRoll() && !p.physics.IsGrounded())
+        {
+            abilities.bugBlast.usedInAir = true;
+            return new BugBlastState(p, abilities.bugBlast.ability);
         }
         return null;
     }

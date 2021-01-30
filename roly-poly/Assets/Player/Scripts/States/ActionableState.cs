@@ -11,7 +11,7 @@ public abstract class ActionableState : PlayerState
         {
             p.animations.ResetRotation();
             p.physics.ToggleRoll();
-            p.physics.Stop();
+            p.physics.StopX();
             if(!p.physics.IsRoll())
             {
                 p.physics.ResetRotation();

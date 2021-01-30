@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum StateID { Null, Idle, Rolling, Walking, Falling, Rising, Dribble, BoostBall} 
+public enum StateID { Null, Idle, Rolling, Walking, Falling, Rising, Dribble, BoostBall, BugBlast} 
 public abstract class PlayerState
 {
     protected PlayerController p;

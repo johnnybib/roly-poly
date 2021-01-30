@@ -9,7 +9,10 @@ public class PlayerPhysics : MonoBehaviour
     public CircleCollider2D rollCollider;
     public PhysicsMaterial2D rollMat;
     public PhysicsMaterial2D walkMat;
-    public float xAccel;
+    public float xAccelAerialRoll;
+    public float xAccelGroundedRoll;
+    public float xAccelAerialWalk;
+    public float xAccelGroundedWalk;
     public float stopThreshold;
     public float walkFriction;
     public float rollFriction;
@@ -17,7 +20,8 @@ public class PlayerPhysics : MonoBehaviour
     public float maxMoveSpeedRoll;
     public float switchBumpAmount;
     
-    public float raycastDist;
+    public float raycastDistRoll;
+    public float raycastDistWalk;
     
     
     [SerializeField]
@@ -43,13 +47,13 @@ public class PlayerPhysics : MonoBehaviour
     }
     void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDist, GROUND_LAYER_MASK);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, IsRoll() ?  raycastDistRoll : raycastDistWalk, GROUND_LAYER_MASK);
         if(hit.collider != null) {
-            Debug.DrawRay(transform.position, Vector2.down * raycastDist, Color.red);
+            Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.red);
             isGrounded = true;
         }
         else {
-            Debug.DrawRay(transform.position, Vector2.down * raycastDist, Color.yellow);
+            Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.yellow);
             isGrounded = false;
         }
         if(isGrounded)
@@ -59,7 +63,7 @@ public class PlayerPhysics : MonoBehaviour
             else
                 rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * walkFriction * Time.fixedDeltaTime);
             if(Mathf.Abs(rb.velocity.magnitude) < stopThreshold) {
-                Stop();
+                StopX();
             }
         }
         isFalling = rb.velocity.y < 0;
@@ -68,7 +72,7 @@ public class PlayerPhysics : MonoBehaviour
     public void Move(float dir) 
     {
         
-        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
         if(isGrounded)
         {
             if(isRoll && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll){
@@ -82,7 +86,7 @@ public class PlayerPhysics : MonoBehaviour
 
     public void Roll(float dir)
     {
-        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
         if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedRoll;
         
@@ -90,7 +94,7 @@ public class PlayerPhysics : MonoBehaviour
 
     public void Walk(float dir)
     {
-        rb.AddForce(transform.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(transform.right * dir * GetXAccel() * Time.fixedDeltaTime);
         if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
     }
@@ -100,9 +104,10 @@ public class PlayerPhysics : MonoBehaviour
         rb.AddForce(dir * force);
     }
 
-    public void Stop()
+
+    public void StopX()
     {
-        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         rb.angularVelocity = 0;
     }
 
@@ -136,6 +141,24 @@ public class PlayerPhysics : MonoBehaviour
     {
         return isGrounded;
     }
+
+    public float GetXAccel()
+    {
+        if(IsGrounded())
+        {
+            if(IsRoll())
+                return xAccelGroundedRoll;
+            else
+                return xAccelGroundedWalk;
+        }
+        else
+        {
+            if(IsRoll())
+                return xAccelAerialRoll;
+            else
+                return xAccelAerialWalk;
+        }
+    }
     public bool IsFalling()
     {
         return isFalling;
@@ -156,6 +179,11 @@ public class PlayerPhysics : MonoBehaviour
     public void BoostBall(float boostForce)
     {       
         rb.AddForce(Vector2.right * boostForce * GetFacingDir());
+    }
+
+    public void BugBlast(float blastForce)
+    {
+        rb.AddForce(Vector2.up * blastForce);
     }
     #endregion
 
