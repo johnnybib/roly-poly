@@ -96,7 +96,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6072615
+  m_Radius: 0.7
 --- !u!114 &5412011950357629249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +119,5 @@ MonoBehaviour:
   maxMoveSpeedWalk: 1
   maxMoveSpeedRoll: 20
   switchBumpAmount: 400
-  isRoll: 1
-  isGrounded: 0
   raycastDist: 0.75
-  facingDir: -1
+  isRoll: 0

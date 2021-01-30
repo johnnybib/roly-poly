@@ -14,9 +14,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "South",
+                    "name": "Space",
                     "type": "Button",
                     "id": "c4ea520f-d3ef-46d0-99b7-a7654bf91daa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "W",
+                    "type": "Button",
+                    "id": "ba61b3b0-fde9-4175-b097-96ed1258bab4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "S",
+                    "type": "Button",
+                    "id": "ef7a528a-4308-4b68-9f8b-03ae29105f3b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -63,7 +79,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "South",
+                    "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc7483a1-1541-4974-9bb8-02fdd9a93f2c",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "W",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8db949f3-e70f-471c-bf67-5724791b0560",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "S",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

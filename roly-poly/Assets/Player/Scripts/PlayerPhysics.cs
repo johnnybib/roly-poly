@@ -14,13 +14,15 @@ public class PlayerPhysics : MonoBehaviour
     public float maxMoveSpeedWalk;
     public float maxMoveSpeedRoll;
     public float switchBumpAmount;
-    public bool isRoll;
-    public bool isGrounded;
+    
     public float raycastDist;
     
     
     [SerializeField]
+    private bool isRoll;
     private int facingDir;
+    private bool isFalling;
+    private bool isGrounded;
     private int GROUND_LAYER_MASK;
     private Quaternion ecbRotation;
 
@@ -28,6 +30,7 @@ public class PlayerPhysics : MonoBehaviour
     void Awake()
     {
         GROUND_LAYER_MASK = 1 << LayerMask.NameToLayer("Ground");
+        facingDir = -1;
     }
 
     void Start()
@@ -57,12 +60,13 @@ public class PlayerPhysics : MonoBehaviour
                 Stop();
             }
         }
+        isFalling = rb.velocity.y < 0;
 
     }
-    public void Move(Vector2 dir) 
+    public void Move(float dir) 
     {
         
-        rb.AddForce(dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
         if(isGrounded)
         {
             if(isRoll && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll){
@@ -72,8 +76,21 @@ public class PlayerPhysics : MonoBehaviour
                 rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
             }
         }
-        if(dir.x != 0)
-            facingDir = (int)Mathf.Sign(dir.x);
+    }
+
+    public void Roll(float dir)
+    {
+        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll)
+            rb.velocity = rb.velocity.normalized * maxMoveSpeedRoll;
+        
+    }
+
+    public void Walk(float dir)
+    {
+        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
+            rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
     }
 
     public void Bump(Vector2 dir, float force)
@@ -96,17 +113,43 @@ public class PlayerPhysics : MonoBehaviour
         {
             Bump(Vector2.up, switchBumpAmount);
         }
-
     }
 
+    public bool IsRoll()
+    {
+        return isRoll;
+    }
+
+    public void FlipFacingDirection()
+    {
+        facingDir = facingDir * -1;
+    }
     public int GetFacingDir()
     {
         return facingDir;
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
+    public bool IsFalling()
+    {
+        return isFalling;
     }
     
     public void ResetRotation()
     {
         transform.localRotation = ecbRotation;
     }
+
+
+    #region Ability Physics 
+    public void Dribble(float force)
+    {
+        rb.AddForce(Vector2.down * force);
+    }
+    #endregion
+
 
 }
