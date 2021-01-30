@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e857eeb7cf8e10e44bb9eef1bda212fd, type: 3}
   m_Name: Dribble
   m_EditorClassIdentifier: 
-  dribbleForce: 3000
+  dribbleForce: 1000

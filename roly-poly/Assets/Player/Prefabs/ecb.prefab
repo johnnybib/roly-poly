@@ -50,7 +50,7 @@ Rigidbody2D:
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 6200000, guid: 0d73b8769e1d51648b08d52e995e4feb, type: 2}
+  m_Material: {fileID: 6200000, guid: 3be28a5586ba1144bbd2fe5ddf5df8ef, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -68,7 +68,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.018502474, y: -0.07401037}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -79,7 +79,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5180717, y: 0.85197926}
   m_EdgeRadius: 0
 --- !u!58 &8939080908176968265
 CircleCollider2D:
@@ -112,6 +112,8 @@ MonoBehaviour:
   rb: {fileID: 1378727157025189332}
   flatCollider: {fileID: 3520586603660377579}
   rollCollider: {fileID: 8939080908176968265}
+  rollMat: {fileID: 6200000, guid: 0d73b8769e1d51648b08d52e995e4feb, type: 2}
+  walkMat: {fileID: 6200000, guid: 3be28a5586ba1144bbd2fe5ddf5df8ef, type: 2}
   xAccel: 2000
   stopThreshold: 0.1
   walkFriction: 300

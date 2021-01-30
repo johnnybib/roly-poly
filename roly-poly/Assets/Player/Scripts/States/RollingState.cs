@@ -5,7 +5,7 @@ using UnityEngine;
 public class RollingState : ActionableState
 {
     private float currHorz;
-    public RollingState(PlayerController p) : base(p, StateID.Rolling) { }
+    public RollingState(PlayerController p, StateID stateID = StateID.Null) : base(p, stateID != StateID.Null ? stateID : StateID.Rolling) { }
 
     public override PlayerState Update()
     {

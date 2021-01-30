@@ -7,6 +7,8 @@ public class PlayerPhysics : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D flatCollider;
     public CircleCollider2D rollCollider;
+    public PhysicsMaterial2D rollMat;
+    public PhysicsMaterial2D walkMat;
     public float xAccel;
     public float stopThreshold;
     public float walkFriction;
@@ -88,7 +90,7 @@ public class PlayerPhysics : MonoBehaviour
 
     public void Walk(float dir)
     {
-        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(transform.right * dir * xAccel * Time.fixedDeltaTime);
         if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
     }
@@ -109,6 +111,7 @@ public class PlayerPhysics : MonoBehaviour
         isRoll = !isRoll;
         flatCollider.enabled = !isRoll;
         rollCollider.enabled = isRoll;
+        rb.sharedMaterial = isRoll ? rollMat : walkMat;
         if(isGrounded)
         {
             Bump(Vector2.up, switchBumpAmount);
