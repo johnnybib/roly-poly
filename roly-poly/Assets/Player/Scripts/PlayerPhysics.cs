@@ -9,7 +9,10 @@ public class PlayerPhysics : MonoBehaviour
     public CircleCollider2D rollCollider;
     public PhysicsMaterial2D rollMat;
     public PhysicsMaterial2D walkMat;
-    public float xAccel;
+    public float xAccelAerialRoll;
+    public float xAccelGroundedRoll;
+    public float xAccelAerialWalk;
+    public float xAccelGroundedWalk;
     public float stopThreshold;
     public float walkFriction;
     public float rollFriction;
@@ -69,7 +72,7 @@ public class PlayerPhysics : MonoBehaviour
     public void Move(float dir) 
     {
         
-        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
         if(isGrounded)
         {
             if(isRoll && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll){
@@ -83,7 +86,7 @@ public class PlayerPhysics : MonoBehaviour
 
     public void Roll(float dir)
     {
-        rb.AddForce(Vector2.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
         if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedRoll;
         
@@ -91,7 +94,7 @@ public class PlayerPhysics : MonoBehaviour
 
     public void Walk(float dir)
     {
-        rb.AddForce(transform.right * dir * xAccel * Time.fixedDeltaTime);
+        rb.AddForce(transform.right * dir * GetXAccel() * Time.fixedDeltaTime);
         if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
     }
@@ -137,6 +140,24 @@ public class PlayerPhysics : MonoBehaviour
     public bool IsGrounded()
     {
         return isGrounded;
+    }
+
+    public float GetXAccel()
+    {
+        if(IsGrounded())
+        {
+            if(IsRoll())
+                return xAccelGroundedRoll;
+            else
+                return xAccelGroundedWalk;
+        }
+        else
+        {
+            if(IsRoll())
+                return xAccelAerialRoll;
+            else
+                return xAccelAerialWalk;
+        }
     }
     public bool IsFalling()
     {
