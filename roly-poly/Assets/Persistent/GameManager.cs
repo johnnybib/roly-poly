@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject loadingScreen;
     public PersistentPlayerController pp;
+    [HideInInspector]
+    public PlayerController playerController;
+    public GameObject playerPrefab;
     private bool loadGameplayWithSaveData = false;
 
     void Awake()
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviour
         stateOnSceneLoad = gameStates.MainMenu;
 
         loadingScreen.SetActive(false);
-
+        pp.SetCanInput(false);
     }
 
     #region State Loading Handlers
@@ -85,7 +88,18 @@ public class GameManager : MonoBehaviour
 
     public void GameplayStartedHandler(GameplayController gpc)
     {
+        playerController = Instantiate(playerPrefab).GetComponent<PlayerController>();
+        pp.SetPlayerController(playerController);
+        pp.SetCanInput(true);
 
+        if (loadGameplayWithSaveData)
+        {
+            Debug.Log("Loading from saved data");
+        }
+
+        gpc.SetGameManager(this);
+        gpc.SetupEventListeners();
+        currentState.OnEnter.Invoke();
     }
     public void OnFinishedLoadingState()
     {
@@ -104,13 +118,18 @@ public class GameManager : MonoBehaviour
 
     public void StartGameplay(bool loadWithSaveData = false)
     {
+        currentState.OnExit.Invoke();
+
         loadGameplayWithSaveData = loadWithSaveData;
+        SetCurrentState(gameStates.Gameplay);
         LoadScene("Gameplay");
+
     }
 
     public void EndGameplay()
     {
         // End or main menu
+        pp.SetCanInput(false);
         //LoadScene("GameEnd");
         //LoadScene("MainMenu");
     }
@@ -131,14 +150,12 @@ public class GameManager : MonoBehaviour
     #region Scene Loading
     private void LoadScene(string sceneName)
     {
-        pp.SetCanInput(false);
         loadingScreen.SetActive(true);
         SceneManager.LoadSceneAsync(sceneName);
     }
     private void OnSceneLoaded(Scene sceneLoaded, LoadSceneMode loadSceneMode)
     {
         Debug.Log("scene loaded");
-        pp.SetCanInput(true);
         loadingScreen.SetActive(false);
     }
     #endregion

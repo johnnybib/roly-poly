@@ -23,6 +23,7 @@ public class GameplayController : GameStateController
     }
     public override void Enter()
     {
+        gameManager.playerController.transform.position = defaultSpawnPosition.position;
     }
     public override void Exit()
     {
@@ -30,8 +31,40 @@ public class GameplayController : GameStateController
     }
     #endregion
 
+    public GameObject pauseUI;
+    public Transform defaultSpawnPosition;
+
     private bool paused;
 
+    void Awake()
+    {
+        PlayerController.PlayerPressedStartEvent += PlayerPressedStartHandler;
+    }
+
+    void Start()
+    {
+        OnGameplayLoaded.Invoke(this);
+    }
+
+    private void PlayerDiedHandler(PlayerController sourcePlayer)
+    {
+
+    }
+
+    private void PlayerPressedStartHandler(PlayerController p)
+    {
+        //UISfx.Instance.PlayBack();
+        if (paused)
+        {
+            pauseUI.SetActive(false);
+            Unpause();
+        }
+        else
+        {
+            pauseUI.SetActive(true);
+            Pause();
+        }
+    }
 
     public void Pause()
     {

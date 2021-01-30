@@ -5,6 +5,7 @@ using UnityEngine;
 public class PersistentPlayerController : MonoBehaviour
 {
     public PersistentPlayerGameplayInputs gameplayInputs;
+    private PlayerController playerController;
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -23,5 +24,11 @@ public class PersistentPlayerController : MonoBehaviour
     public void SetCanInput(bool canInput)
     {
         gameplayInputs.SetCanInput(canInput);
+    }
+
+    public void SetPlayerController(PlayerController p)
+    {
+        this.playerController = p;
+        gameplayInputs.SetPlayerController(p);
     }
 }

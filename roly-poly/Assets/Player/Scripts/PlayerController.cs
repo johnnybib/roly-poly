@@ -1,15 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Static Events
+    public static event Action<PlayerController> PlayerPressedStartEvent = delegate { };
+    public static event Action<PlayerController> PlayerWonEvent = delegate { };
+    public static event Action<PlayerController> PlayerDeadEvent = delegate { };
+    public static event Action<PlayerController> PlayerInstantiatedEvent = delegate { };
+    #endregion
     public PlayerPhysics physics;
     public PlayerAnimations animations;
     public PlayerAbilities abilities;
     public GameObject model;
+    public bool isDebug;
+    public PlayerInput playerInput;
 
-    public struct Inputs{
+    public struct Inputs
+    {
         public float horz;
         public float vert;
         public bool dribble;
@@ -18,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public Inputs inputs;
 
     private PlayerState state;
-    
+
     [SerializeField]
     private StateID stateID;
 
@@ -43,10 +54,19 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        state = new IdleState(this);        
+        state = new IdleState(this);
         abilities.SetPlayerController(this);
         abilities.UnlockAll();
-    }    
+        pause = false;
+        if (isDebug)
+        {
+            playerInput.enabled = true;
+        }
+        else
+        {
+            Destroy(playerInput);
+        }
+    }
 
     public void CheckNewState(PlayerState newState)
     {
@@ -66,17 +86,17 @@ public class PlayerController : MonoBehaviour
     //Use fixed update because the ecb moves in fixed update
     void FixedUpdate()
     {
-        model.transform.position = physics.rb.transform.position;   
-        if(!physics.IsRoll()) 
+        model.transform.position = physics.rb.transform.position;
+        if (!physics.IsRoll())
             model.transform.localRotation = physics.rb.transform.localRotation;
-        if(!pause)
+        if (!pause)
         {
 
             CheckNewState(state.Update());
             ClearInputs();
         }
     }
-    
+
     void Update()
     {
         if (!pause)
@@ -119,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartNextAnim()
     {
-        if (nextAnim.name != null )
+        if (nextAnim.name != null)
         {
             Debug.Log("Start " + this.nextAnim.name);
             animations.Play(nextAnim.name);
@@ -143,6 +163,7 @@ public class PlayerController : MonoBehaviour
     public void OnSwitchMode()
     {
         inputs.switchMode = true;
+        Debug.Log("Swithc");
         HandleInput();
     }
 
@@ -150,6 +171,11 @@ public class PlayerController : MonoBehaviour
     {
         inputs.dribble = true;
         HandleInput();
+    }
+
+    public void OnStart()
+    {
+        PlayerPressedStartEvent(this);
     }
 
     #endregion
@@ -162,7 +188,7 @@ public class PlayerController : MonoBehaviour
             animations.Flip(physics.GetFacingDir());
             physics.FlipFacingDirection();
         }
-    }    
+    }
     public bool IsInputHorz()
     {
         if (Mathf.Abs(inputs.horz) > 0)
@@ -174,4 +200,9 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    public void SetPause(bool pause)
+    {
+        this.pause = pause;
+    }
 }
