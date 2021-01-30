@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7549147420423112193}
   - component: {fileID: 7549147420423112194}
   - component: {fileID: 7549147420423112192}
+  - component: {fileID: 9151121544923289006}
   m_Layer: 0
   m_Name: roly-poly
   m_TagString: Untagged
@@ -94,6 +95,30 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c4ea520f-d3ef-46d0-99b7-a7654bf91daa
     m_ActionName: Gameplay/Space[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ba61b3b0-fde9-4175-b097-96ed1258bab4
+    m_ActionName: Gameplay/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ef7a528a-4308-4b68-9f8b-03ae29105f3b
+    m_ActionName: Gameplay/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7549147420423112194}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnNorth
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f4c7c5bb-da95-44cd-a225-4acfea855f1a
+    m_ActionName: Gameplay/Shift[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -118,7 +143,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7549147420423112192}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnHorizontal
+        m_MethodName: OnStick
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -134,7 +159,19 @@ MonoBehaviour:
   NorthAny:
     pressEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7549147420423112192}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: OnSwitchMode
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     releaseEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -172,7 +209,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 7549147420423112192}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-          m_MethodName: OnSwitchMode
+          m_MethodName: OnDribble
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -333,7 +370,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physics: {fileID: 930852733142686289}
   animations: {fileID: 8283304838718951382}
+  abilities: {fileID: 9151121544923289006}
   model: {fileID: 7549147419088319107}
+  stateID: 0
+--- !u!114 &9151121544923289006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549147420423112219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4f90667b3bc4f4cb6abad01068c79b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities:
+    dribble:
+      unlocked: 0
+      ability: {fileID: 11400000, guid: b5147abcda6df944ba778c974880dde0, type: 2}
+    stickyFeet:
+      unlocked: 0
+      ability: {fileID: 0}
+    boostBall:
+      unlocked: 0
+      ability: {fileID: 0}
+    bugBlast:
+      unlocked: 0
+      ability: {fileID: 0}
 --- !u!1001 &1891888951806856901
 PrefabInstance:
   m_ObjectHideFlags: 0

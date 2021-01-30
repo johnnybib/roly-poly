@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 56c4791d0858d9d4f853a71643d635e1
+guid: 79595087af5d04b46992e75ed2534349
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2311659948842064771
-    second: Player_0
+      213: 5299786552454288431
+    second: SwitchMode_0
   - first:
-      213: 7364682651488144517
-    second: Player_1
+      213: -4868219611140190392
+    second: SwitchMode_1
+  - first:
+      213: -4668642678452884770
+    second: SwitchMode_2
+  - first:
+      213: 6381157153322774269
+    second: SwitchMode_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_0
+      name: SwitchMode_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7465c336855befd0800000000000000
-      internalID: -2311659948842064771
+      spriteID: f241e6c3acf9c8940800000000000000
+      internalID: 5299786552454288431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_1
+      name: SwitchMode_1
       rect:
         serializedVersion: 2
         x: 34
@@ -138,14 +144,56 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 9
-      pivot: {x: 0.5156472, y: 0.54593843}
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58cce6d0adb943660800000000000000
-      internalID: 7364682651488144517
+      spriteID: 84f066d7e0c907cb0800000000000000
+      internalID: -4868219611140190392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwitchMode_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eda669f2836a53fb0800000000000000
+      internalID: -4668642678452884770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwitchMode_3
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.51651573, y: 0.5473558}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfe2fb34f9c6e8850800000000000000
+      internalID: 6381157153322774269
       vertices: []
       indices: 
       edges: []
