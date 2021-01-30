@@ -59,7 +59,7 @@ public class PlayerPhysics : MonoBehaviour
             else
                 rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * walkFriction * Time.fixedDeltaTime);
             if(Mathf.Abs(rb.velocity.magnitude) < stopThreshold) {
-                Stop();
+                StopX();
             }
         }
         isFalling = rb.velocity.y < 0;
@@ -100,9 +100,10 @@ public class PlayerPhysics : MonoBehaviour
         rb.AddForce(dir * force);
     }
 
-    public void Stop()
+
+    public void StopX()
     {
-        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         rb.angularVelocity = 0;
     }
 
@@ -156,6 +157,11 @@ public class PlayerPhysics : MonoBehaviour
     public void BoostBall(float boostForce)
     {       
         rb.AddForce(Vector2.right * boostForce * GetFacingDir());
+    }
+
+    public void BugBlast(float blastForce)
+    {
+        rb.AddForce(Vector2.up * blastForce);
     }
     #endregion
 

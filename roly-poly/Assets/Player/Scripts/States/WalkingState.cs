@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WalkingState : ActionableState
 {
-    public WalkingState(PlayerController p) : base(p, StateID.Walking) { }
+    public WalkingState(PlayerController p, StateID stateID = StateID.Null) : base(p, stateID != StateID.Null ? stateID : StateID.Walking) { }
     public override PlayerState Update()
     {
         p.CheckFlip(p.inputs.horz);

@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
         public bool dribble;
         public bool boostBall;
         public bool releaseBoostBall;
+        public bool bugBlast;
         public bool switchMode;
+        
     }
     public Inputs inputs;
 
@@ -125,6 +127,7 @@ public class PlayerController : MonoBehaviour
         inputs.switchMode = false;
         inputs.boostBall = false;
         inputs.releaseBoostBall = false;
+        inputs.bugBlast = false;
     }
 
 
@@ -183,6 +186,12 @@ public class PlayerController : MonoBehaviour
     public void OnReleaseBoostBall(float duration)
     {
         inputs.releaseBoostBall = true;
+        HandleInput();
+    }
+
+    public void OnBugBlast()
+    {
+        inputs.bugBlast = true;
         HandleInput();
     }
 
