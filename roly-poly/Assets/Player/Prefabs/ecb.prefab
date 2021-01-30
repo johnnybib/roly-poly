@@ -121,5 +121,6 @@ MonoBehaviour:
   maxMoveSpeedWalk: 1
   maxMoveSpeedRoll: 20
   switchBumpAmount: 400
-  raycastDist: 0.75
+  raycastDistRoll: 0.75
+  raycastDistWalk: 0.5
   isRoll: 0

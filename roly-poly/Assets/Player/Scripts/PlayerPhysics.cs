@@ -17,7 +17,8 @@ public class PlayerPhysics : MonoBehaviour
     public float maxMoveSpeedRoll;
     public float switchBumpAmount;
     
-    public float raycastDist;
+    public float raycastDistRoll;
+    public float raycastDistWalk;
     
     
     [SerializeField]
@@ -43,13 +44,13 @@ public class PlayerPhysics : MonoBehaviour
     }
     void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDist, GROUND_LAYER_MASK);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, IsRoll() ?  raycastDistRoll : raycastDistWalk, GROUND_LAYER_MASK);
         if(hit.collider != null) {
-            Debug.DrawRay(transform.position, Vector2.down * raycastDist, Color.red);
+            Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.red);
             isGrounded = true;
         }
         else {
-            Debug.DrawRay(transform.position, Vector2.down * raycastDist, Color.yellow);
+            Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.yellow);
             isGrounded = false;
         }
         if(isGrounded)
