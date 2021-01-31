@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7549147420423112194}
   - component: {fileID: 7549147420423112192}
   - component: {fileID: 9151121544923289006}
+  - component: {fileID: 1577677551858921433}
   m_Layer: 0
   m_Name: roly-poly
   m_TagString: Player
@@ -450,7 +451,8 @@ MonoBehaviour:
   animations: {fileID: 8283304838718951382}
   abilities: {fileID: 9151121544923289006}
   model: {fileID: 7549147419088319107}
-  health: 0
+  currentHealth: 0
+  maxHealth: 0
   isDebug: 0
   playerInput: {fileID: 7549147420423112193}
   isInvincible: 0
@@ -481,6 +483,14 @@ MonoBehaviour:
       unlocked: 0
       usedInAir: 0
       ability: {fileID: 11400000, guid: 461d2079b02358d4b8a0c3e2ef0b89bb, type: 2}
+--- !u!81 &1577677551858921433
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549147420423112219}
+  m_Enabled: 1
 --- !u!1001 &1891888951806856901
 PrefabInstance:
   m_ObjectHideFlags: 0

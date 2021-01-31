@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DribbleState : RollingState
 {
-    public DribbleState(PlayerController p, Dribble dribble) : base(p, StateID.Dribble) {
-        this.dribble = dribble;   
+    public DribbleState(PlayerController p, Dribble dribble) : base(p, StateID.Dribble)
+    {
+        this.dribble = dribble;
     }
     private Dribble dribble;
 
@@ -15,6 +16,10 @@ public class DribbleState : RollingState
     }
     public override void StateEnter()
     {
+        if (GlobalSFX.Instance)
+        {
+            GlobalSFX.Instance.PlayDribble();
+        }
         p.physics.Dribble(dribble.dribbleForce);
     }
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BoostBallState : PlayerState
 {
-    public BoostBallState(PlayerController p, BoostBall boostBall) : base(p, StateID.BoostBall) {
-        this.boostBall = boostBall;   
+    public BoostBallState(PlayerController p, BoostBall boostBall) : base(p, StateID.BoostBall)
+    {
+        this.boostBall = boostBall;
     }
     private BoostBall boostBall;
     private float chargeDuration = 0;
     public override PlayerState HandleInput()
     {
         p.CheckFlip(p.inputs.horz);
-        if(p.inputs.releaseBoostBall)
+        if (p.inputs.releaseBoostBall)
         {
             Boost();
             return new RollingState(p);
@@ -23,8 +24,9 @@ public class BoostBallState : PlayerState
     public override PlayerState Update()
     {
         chargeDuration += Time.fixedDeltaTime;
-        if(chargeDuration >= boostBall.maxChargeTime)
+        if (chargeDuration >= boostBall.maxChargeTime)
         {
+
             Boost();
             return new RollingState(p);
         }
@@ -33,6 +35,10 @@ public class BoostBallState : PlayerState
 
     public void Boost()
     {
+        if (GlobalSFX.Instance)
+        {
+            GlobalSFX.Instance.PlayBoostBallRelease();
+        }
         // Debug.Log("boost ball");
         // Debug.Log(chargeDuration);
         p.physics.BoostBall(chargeDuration * boostBall.forcePerSecond);
@@ -40,5 +46,9 @@ public class BoostBallState : PlayerState
     public override void StateEnter()
     {
         chargeDuration = 0;
+        if (GlobalSFX.Instance)
+        {
+            //GlobalSFX.Instance.PlayBoostBallCharge();
+        }
     }
 }

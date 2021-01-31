@@ -4,18 +4,22 @@ using UnityEngine;
 
 public abstract class ActionableState : PlayerState
 {
-    public ActionableState(PlayerController p, StateID stateID) : base(p, stateID){ }
+    public ActionableState(PlayerController p, StateID stateID) : base(p, stateID) { }
     public override PlayerState HandleInput()
     {
-        if(p.inputs.switchMode)
+        if (p.inputs.switchMode)
         {
+            if (GlobalSFX.Instance)
+            {
+                GlobalSFX.Instance.PlaySwitchMode();
+            }
             p.animations.ResetRotation();
             p.physics.ToggleRoll();
             p.physics.StopX();
-            if(!p.physics.IsRoll())
+            if (!p.physics.IsRoll())
             {
                 p.physics.ResetRotation();
-                if(p.IsInputHorz())
+                if (p.IsInputHorz())
                 {
                     return new WalkingState(p);
                 }
@@ -26,11 +30,12 @@ public abstract class ActionableState : PlayerState
             }
             else
             {
+
                 return new RollingState(p);
             }
         }
-        
-        return p.abilities.CheckAbilities();        
+
+        return p.abilities.CheckAbilities();
     }
 
     public override PlayerState Update()
