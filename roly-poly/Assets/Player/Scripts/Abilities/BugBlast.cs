@@ -6,4 +6,5 @@ using UnityEngine;
 public class BugBlast : ScriptableObject
 {
     public float blastForce;
+    public GameObject bugBlastHitbox;
 }

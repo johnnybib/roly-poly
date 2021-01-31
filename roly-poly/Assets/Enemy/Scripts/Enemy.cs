@@ -35,20 +35,31 @@ public abstract class Enemy : MonoBehaviour
     {
         Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
     }
+    
+    //Damaging hitbox
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        GameObject other = collider.gameObject;
+        if(other.CompareTag("playerDamageBox"))
+        {
+            GetHit(1);
+        }
+    }
 
+    //Hit player
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
         GameObject other = collision.gameObject;
         Debug.Log("Collide with " + other.tag);
         if(other.CompareTag("Player"))
         {
+            //Player hit on head?
             PlayerPhysics physics = other.GetComponent<PlayerPhysics>();
             if((physics.transform.position + physics.hitPointOffset).y > (transform.position + hitPointOffset).y && physics.IsRoll())
             {
                 Debug.Log("Hit");
                 GetHit(1);
-            }
+            }//Else do damage
             else
             {
                 Debug.Log("Take damage");
