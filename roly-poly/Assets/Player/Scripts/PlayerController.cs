@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> PlayerPressedStartEvent = delegate { };
     public static event Action<PlayerController> PlayerWonEvent = delegate { };
     public static event Action<PlayerController> PlayerDeadEvent = delegate { };
+    public static event Action<PlayerController> PlayerUpdateHealth = delegate { };
     public static event Action<PlayerController> PlayerInstantiatedEvent = delegate { };
     #endregion
 
@@ -21,7 +22,10 @@ public class PlayerController : MonoBehaviour
     public PlayerAbilities abilities;
     public GameObject model;
     [HideInInspector]
-    public int health;
+    public int currentHealth;
+    [HideInInspector]
+    public int maxHealth;
+
     public bool isDebug;
     public PlayerInput playerInput;
 
@@ -69,7 +73,8 @@ public class PlayerController : MonoBehaviour
         state = new IdleState(this);
         stateID = state.GetStateID();
         pause = false;
-        health = HEALTH_DEFAULT;
+        currentHealth = HEALTH_DEFAULT;
+        maxHealth = HEALTH_DEFAULT;
         if (isDebug)
         {
             playerInput.enabled = true;
@@ -82,6 +87,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        PlayerUpdateHealth(this);
         state.StateEnter();
     }
 
@@ -232,8 +238,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        currentHealth -= damage;
+        PlayerUpdateHealth(this);
+        if (currentHealth <= 0)
         {
             PlayerDeadEvent.Invoke(this);
         }

@@ -22,6 +22,8 @@ public class GameplayController : GameStateController
         }
         PlayerController.PlayerPressedStartEvent -= PlayerPressedStartHandler;
         PlayerController.PlayerDeadEvent -= PlayerDiedHandler;
+        PlayerController.PlayerUpdateHealth -= PlayerUpdateHealthHandler;
+
     }
     public override void Enter()
     {
@@ -35,6 +37,8 @@ public class GameplayController : GameStateController
 
     public GameObject pauseUI;
     public GameObject deadUI;
+
+    public HudController hudController;
     public Transform defaultSpawnPosition;
 
     private bool paused;
@@ -43,6 +47,8 @@ public class GameplayController : GameStateController
     {
         PlayerController.PlayerPressedStartEvent += PlayerPressedStartHandler;
         PlayerController.PlayerDeadEvent += PlayerDiedHandler;
+        PlayerController.PlayerUpdateHealth += PlayerUpdateHealthHandler;
+
         pauseUI.SetActive(false);
         deadUI.SetActive(false);
     }
@@ -70,6 +76,12 @@ public class GameplayController : GameStateController
         {
             Pause();
         }
+    }
+
+    private void PlayerUpdateHealthHandler(PlayerController p)
+    {
+        hudController.SetMaxHealth(p.maxHealth);
+        hudController.SetCurrentHealth(p.currentHealth);
     }
 
     public void Pause()
