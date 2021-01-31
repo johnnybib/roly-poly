@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AbilitiesToUnlock
+{
+    Dribble,
+    BoostBall,
+    StickyFeet,
+    BugBlast
+}
+
 public class PlayerAbilities : MonoBehaviour
 {
+
     private PlayerController p;
     [System.Serializable]
     public struct DribbleAbility
@@ -47,7 +56,7 @@ public class PlayerAbilities : MonoBehaviour
     }
     public void Update()
     {
-        if(p.physics.IsGrounded() && abilities.bugBlast.usedInAir)
+        if (p.physics.IsGrounded() && abilities.bugBlast.usedInAir)
             abilities.bugBlast.usedInAir = false;
 
     }
@@ -61,7 +70,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             return new BoostBallState(p, abilities.boostBall.ability);
         }
-        else if(p.inputs.bugBlast && abilities.bugBlast.unlocked && !abilities.bugBlast.usedInAir && !p.physics.IsRoll() && !p.physics.IsGrounded())
+        else if (p.inputs.bugBlast && abilities.bugBlast.unlocked && !abilities.bugBlast.usedInAir && !p.physics.IsRoll() && !p.physics.IsGrounded())
         {
             abilities.bugBlast.usedInAir = true;
             return new BugBlastState(p, abilities.bugBlast.ability);
@@ -83,5 +92,17 @@ public class PlayerAbilities : MonoBehaviour
         abilities.boostBall.unlocked = false;
         abilities.bugBlast.unlocked = false;
 
+    }
+
+    public void Unlock(AbilitiesToUnlock abilityToUnlock)
+    {
+        if (abilityToUnlock == AbilitiesToUnlock.Dribble)
+            abilities.dribble.unlocked = true;
+        else if (abilityToUnlock == AbilitiesToUnlock.BoostBall)
+            abilities.boostBall.unlocked = true;
+        else if (abilityToUnlock == AbilitiesToUnlock.StickyFeet)
+            abilities.stickyFeet.unlocked = true;
+        else if (abilityToUnlock == AbilitiesToUnlock.BugBlast)
+            abilities.bugBlast.unlocked = false;
     }
 }

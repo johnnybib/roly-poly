@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> PlayerPressedStartEvent = delegate { };
     public static event Action<PlayerController> PlayerWonEvent = delegate { };
     public static event Action<PlayerController> PlayerDeadEvent = delegate { };
+    public static event Action<PlayerController> PlayerUpdateHealth = delegate { };
+    public static event Action<AbilitiesToUnlock> PlayerUnlockedAbility = delegate { };
     public static event Action<PlayerController> PlayerInstantiatedEvent = delegate { };
     #endregion
 
@@ -22,7 +24,10 @@ public class PlayerController : MonoBehaviour
     public PlayerAbilities abilities;
     public GameObject model;
     [HideInInspector]
-    public int health;
+    public int currentHealth;
+    [HideInInspector]
+    public int maxHealth;
+
     public bool isDebug;
     public PlayerInput playerInput;
 
@@ -72,7 +77,8 @@ public class PlayerController : MonoBehaviour
         state = new IdleState(this);
         stateID = state.GetStateID();
         pause = false;
-        health = HEALTH_DEFAULT;
+        currentHealth = HEALTH_DEFAULT;
+        maxHealth = HEALTH_DEFAULT;
         if (isDebug)
         {
             playerInput.enabled = true;
@@ -85,6 +91,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        PlayerUpdateHealth(this);
         state.StateEnter();
     }
 
@@ -236,8 +243,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        currentHealth -= damage;
+        PlayerUpdateHealth(this);
+        if (currentHealth <= 0)
         {
             PlayerDeadEvent.Invoke(this);
         }
@@ -272,5 +280,36 @@ public class PlayerController : MonoBehaviour
     public bool IsInvincible()
     {
         return isInvincible;
+    }
+
+    public void UnlockAbility(AbilitiesToUnlock ability)
+    {
+        abilities.Unlock(ability);
+        PlayerUnlockedAbility.Invoke(ability);
+    }
+
+    public void LoadPlayerAbilities(SaveData saveData)
+    {
+        if (saveData.dribbleUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.Dribble);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.Dribble);
+        }
+        else if (saveData.boostBallUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.BoostBall);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.BoostBall);
+        }
+        else if (saveData.stickyFeetUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.StickyFeet);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.StickyFeet);
+        }
+        else if (saveData.bugBlastUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.BugBlast);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.BugBlast);
+        }
+
     }
 }
