@@ -26,7 +26,6 @@ public class Zoomer : Enemy
             if(transform.localEulerAngles.z % 90 != 0)
             {
                 transform.localEulerAngles = new Vector3(0, 0, Mathf.Round(transform.localEulerAngles.z/90)*90);
-                Debug.Log("Set rotation to " + transform.localEulerAngles);
             }
             Debug.DrawRay(GetRaycastPoint(), -transform.up * raycastDist, Color.red);
             rotating = false;

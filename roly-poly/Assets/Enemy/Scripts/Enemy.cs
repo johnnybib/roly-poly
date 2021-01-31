@@ -12,8 +12,8 @@ public abstract class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
     public void Die()
-    {
-
+    {   
+        Destroy(gameObject, 0.1f);
     }
     public void GetHit(int damage)
     {
@@ -26,5 +26,18 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        GameObject other = collider.gameObject;
+        Debug.Log(other.tag);
+        if(other.CompareTag("playerDamageBox"))
+        {
+            Debug.Log("collide");
+            if(other.transform.position.y > transform.position.y)
+            {
+                GetHit(1);
+            }
+        }
+    }
     
 }
