@@ -27,12 +27,20 @@ public class SaveStation : MonoBehaviour
         GameObject other = collider.gameObject;
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Saving at Save Station!");
-            if (GlobalSFX.Instance)
+            if (other.GetComponentInParent<PlayerController>().abilities.abilities.egg.unlocked)
             {
-                GlobalSFX.Instance.PlayGameSave();
+
             }
-            Save(other.GetComponentInParent<PlayerController>());
+            else
+            {
+                Debug.Log("Saving at Save Station!");
+                if (GlobalSFX.Instance)
+                {
+                    GlobalSFX.Instance.PlayGameSave();
+                }
+                Save(other.GetComponentInParent<PlayerController>());
+            }
+
         }
     }
 }

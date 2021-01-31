@@ -326,4 +326,9 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void PlayerWin()
+    {
+        PlayerWonEvent.Invoke(this);
+    }
 }

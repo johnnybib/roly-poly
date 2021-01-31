@@ -7,7 +7,8 @@ public enum AbilitiesToUnlock
     Dribble,
     BoostBall,
     StickyFeet,
-    BugBlast
+    BugBlast,
+    Egg
 }
 
 public class PlayerAbilities : MonoBehaviour
@@ -40,12 +41,18 @@ public class PlayerAbilities : MonoBehaviour
         public BugBlast ability;
     }
     [System.Serializable]
+    public struct EggAbility
+    {
+        public bool unlocked;
+    }
+    [System.Serializable]
     public struct Abilities
     {
         public DribbleAbility dribble;
         public StickyFeetAbility stickyFeet;
         public BoostBallAbility boostBall;
         public BugBlastAbility bugBlast;
+        public EggAbility egg;
     }
     public Abilities abilities;
 
@@ -84,6 +91,7 @@ public class PlayerAbilities : MonoBehaviour
         abilities.stickyFeet.unlocked = true;
         abilities.boostBall.unlocked = true;
         abilities.bugBlast.unlocked = true;
+        abilities.egg.unlocked = true;
     }
     public void LockAll()
     {
@@ -103,6 +111,8 @@ public class PlayerAbilities : MonoBehaviour
         else if (abilityToUnlock == AbilitiesToUnlock.StickyFeet)
             abilities.stickyFeet.unlocked = true;
         else if (abilityToUnlock == AbilitiesToUnlock.BugBlast)
-            abilities.bugBlast.unlocked = false;
+            abilities.bugBlast.unlocked = true;
+        else if (abilityToUnlock == AbilitiesToUnlock.Egg)
+            abilities.egg.unlocked = true;
     }
 }
