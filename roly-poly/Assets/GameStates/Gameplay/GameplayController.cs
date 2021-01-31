@@ -106,12 +106,7 @@ public class GameplayController : GameStateController
     public void Save()
     {
         Debug.Log("Saving...");
-        SaveData saveData = new SaveData();
-        saveData.dribbleUnlock = gameManager.playerController.abilities.abilities.dribble.unlocked;
-        saveData.stickyFeetUnlock = gameManager.playerController.abilities.abilities.stickyFeet.unlocked;
-        saveData.boostBallUnlock = gameManager.playerController.abilities.abilities.boostBall.unlocked;
-        saveData.bugBlastUnlock = gameManager.playerController.abilities.abilities.bugBlast.unlocked;
-        SaveSystem.SaveFile(saveData);
+        SaveSystem.SavePlayerControllerData(gameManager.playerController);
         Debug.Log("Saved!");
     }
 

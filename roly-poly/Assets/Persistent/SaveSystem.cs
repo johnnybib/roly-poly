@@ -4,6 +4,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
     private static string filename = "/savefile.dat";
+
+    public static void SavePlayerControllerData(PlayerController player)
+    {
+        SaveData saveData = new SaveData();
+        saveData.dribbleUnlock = player.abilities.abilities.dribble.unlocked;
+        saveData.stickyFeetUnlock = player.abilities.abilities.stickyFeet.unlocked;
+        saveData.boostBallUnlock = player.abilities.abilities.boostBall.unlocked;
+        saveData.bugBlastUnlock = player.abilities.abilities.bugBlast.unlocked;
+        SaveSystem.SaveFile(saveData);
+    }
     public static void SaveFile(SaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
