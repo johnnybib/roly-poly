@@ -25,6 +25,8 @@ public class GameplayController : GameStateController
         PlayerController.PlayerUpdateHealth -= PlayerUpdateHealthHandler;
         PlayerController.PlayerUnlockedAbility -= PlayerUnlockedAbilityHandler;
         PlayerController.PlayerGotEgg -= PlayerGotEggHandler;
+        PlayerController.PlayerWonEvent -= PlayerWonHandler;
+
 
 
     }
@@ -59,6 +61,7 @@ public class GameplayController : GameStateController
         PlayerController.PlayerUpdateHealth += PlayerUpdateHealthHandler;
         PlayerController.PlayerUnlockedAbility += PlayerUnlockedAbilityHandler;
         PlayerController.PlayerGotEgg += PlayerGotEggHandler;
+        PlayerController.PlayerWonEvent += PlayerWonHandler;
 
 
         pauseUI.SetActive(false);
@@ -106,6 +109,11 @@ public class GameplayController : GameStateController
         levelStartMusic.Stop();
         lavaMusic.Play();
         deathLava.StartRising();
+    }
+
+    private void PlayerWonHandler(PlayerController p)
+    {
+        Win();
     }
 
     public void Pause()
