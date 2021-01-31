@@ -17,6 +17,7 @@ public class GlobalSFX : AudioController
     private class SFXList
     {
         public SFX gameStart = null;
+        public SFX gameSave = null;
         public SFX hitGround = null;
         public SFX switchMode = null;
         public SFX playerHurt = null;
@@ -51,6 +52,10 @@ public class GlobalSFX : AudioController
     public void PlayGameStart()
     {
         QueueSFX(soundEffects.gameStart);
+    }
+    public void PlayGameSave()
+    {
+        QueueSFX(soundEffects.gameSave);
     }
 
     public void PlayHitGround()
