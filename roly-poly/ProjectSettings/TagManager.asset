@@ -51,6 +51,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Effect
+    uniqueID: 3590805355
+    locked: 0
   - name: FG1
     uniqueID: 2735669429
     locked: 0

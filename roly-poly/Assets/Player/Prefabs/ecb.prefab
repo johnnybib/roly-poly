@@ -129,6 +129,8 @@ MonoBehaviour:
   switchBumpAmount: 400
   raycastDistRoll: 0.75
   raycastDistWalk: 0.5
+  killSpeed: 17
   hitPointOffset: {x: 0, y: -0.4, z: 0}
   knocbackTime: 0.2
+  prevVel: {x: 0, y: 0}
   isRoll: 0

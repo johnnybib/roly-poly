@@ -9,6 +9,8 @@ public class PlayerAnimations : MonoBehaviour
     public SpriteRenderer sprite;
     public int flipSprite;
     public float rollSpeedMultiplier;
+    public GameObject canKillParticles;
+    public GameObject landingParticles;
     private Vector3 modelScale;
     private Quaternion modelRotation;
     void Start()
@@ -34,6 +36,24 @@ public class PlayerAnimations : MonoBehaviour
     public void SetRollSpeed(float speed)
     {
         anim.SetFloat("Speed", -Mathf.Abs(speed) * rollSpeedMultiplier);
+    }
+
+    public void RotateCanKill(float rotation)
+    {
+        canKillParticles.transform.localEulerAngles = new Vector3(0, 0, rotation);
+    }
+    public void ShowCanKill()
+    {
+        canKillParticles.SetActive(true);
+    }
+    public void HideCanKill()
+    {
+        canKillParticles.SetActive(false);
+    }
+
+    public void PlayLandingParticles(Vector2 position)
+    {
+        Destroy(Instantiate(landingParticles, position, Quaternion.identity), 0.2833f);
     }
     public void ClearAnimTriggers()
     {

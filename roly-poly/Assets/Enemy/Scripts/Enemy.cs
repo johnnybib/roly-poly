@@ -50,19 +50,22 @@ public abstract class Enemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.gameObject;
-        Debug.Log("Collide with " + other.tag);
         if(other.CompareTag("Player"))
         {
             //Player hit on head?
             PlayerPhysics physics = other.GetComponent<PlayerPhysics>();
-            if((physics.transform.position + physics.hitPointOffset).y > (transform.position + hitPointOffset).y && physics.IsRoll())
+            Debug.Log(physics.rb.velocity.magnitude);
+            if(physics.prevVel.magnitude > physics.killSpeed)
             {
                 Debug.Log("Hit");
                 GetHit(1);
-            }//Else do damage
+            }
+            // if((physics.transform.position + physics.hitPointOffset).y > (transform.position + hitPointOffset).y && physics.IsRoll())
+            // {
+
+            // }//Else do damage
             else if(!physics.p.IsInvincible())
             {
-                Debug.Log("Take damage");
                 physics.p.TakeDamage(damage);
                 physics.Knockback(new Vector2(knockbackDir.x * Mathf.Sign(physics.transform.position.x - transform.position.x), knockbackDir.y), knockbackForce);
                 physics.p.SetTempInvincible();

@@ -27,10 +27,12 @@ public class PlayerPhysics : MonoBehaviour
     
     public float raycastDistRoll;
     public float raycastDistWalk;
+    public float killSpeed;
     
     public Vector3 hitPointOffset;
     public float knocbackTime;
-
+    [HideInInspector]
+    public Vector2 prevVel;
     
     [SerializeField]
     private bool isRoll;
@@ -61,9 +63,12 @@ public class PlayerPhysics : MonoBehaviour
     }
     void FixedUpdate()
     {
+        // Debug.Log(rb.velocity.magnitude);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, IsRoll() ?  raycastDistRoll : raycastDistWalk, GROUND_LAYER_MASK);
         if(hit.collider != null) {
             Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.red);
+            if(!IsGrounded() && IsRoll() && rb.velocity.magnitude > 8f)
+                p.animations.PlayLandingParticles(hit.point);
             isGrounded = true;
         }
         else {
@@ -85,6 +90,16 @@ public class PlayerPhysics : MonoBehaviour
         }
         isFalling = rb.velocity.y < 0;
         Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
+        prevVel = rb.velocity;
+        if(prevVel.magnitude > killSpeed)
+        {
+            p.animations.ShowCanKill();
+        }
+        else
+        {
+            p.animations.HideCanKill();
+        }
+        p.animations.RotateCanKill(Vector2.Angle(Vector2.down, rb.velocity) + 180);
 
     }
     public void Move(float dir)
