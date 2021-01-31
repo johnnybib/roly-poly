@@ -309,17 +309,17 @@ public class PlayerController : MonoBehaviour
             abilities.Unlock(AbilitiesToUnlock.Dribble);
             PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.Dribble);
         }
-        else if (saveData.boostBallUnlock)
+        if (saveData.boostBallUnlock)
         {
             abilities.Unlock(AbilitiesToUnlock.BoostBall);
             PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.BoostBall);
         }
-        else if (saveData.stickyFeetUnlock)
+        if (saveData.stickyFeetUnlock)
         {
             abilities.Unlock(AbilitiesToUnlock.StickyFeet);
             PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.StickyFeet);
         }
-        else if (saveData.bugBlastUnlock)
+        if (saveData.bugBlastUnlock)
         {
             abilities.Unlock(AbilitiesToUnlock.BugBlast);
             PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.BugBlast);

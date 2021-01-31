@@ -12,6 +12,10 @@ public class AbilityPickup : MonoBehaviour
         GameObject other = collider.gameObject;
         if (other.CompareTag("Player"))
         {
+            if (GlobalSFX.Instance)
+            {
+                GlobalSFX.Instance.PlayUnlockAbility();
+            }
             other.GetComponentInParent<PlayerController>().UnlockAbility(thisAbility);
             Debug.Log("Got " + thisAbility.ToString());
         }

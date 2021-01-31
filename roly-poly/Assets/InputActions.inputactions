@@ -89,6 +89,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Arrows",
+                    "id": "78b8fbda-aa62-4477-9d94-165498858124",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "10a8cf4f-4ba7-4901-b658-3f0937b52f31",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0008ae4a-8e16-412e-8a0f-95dc837225e7",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "9268e124-877b-437d-be33-076132d51853",
                     "path": "<Keyboard>/space",
@@ -123,6 +156,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a043a6d0-6eb0-48dc-b63f-04138ce50e71",
+                    "path": "<Keyboard>/z",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "J",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "33fa6d81-0471-4ccd-9f21-02e0cf4604ea",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -147,6 +191,17 @@
                     "name": "",
                     "id": "3963b77f-2365-45e6-939b-112b87f97c30",
                     "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "K",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a3dd627-541a-41bb-b380-20f2512937ef",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

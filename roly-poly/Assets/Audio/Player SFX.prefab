@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7183246209721081172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7183246209721081173}
+  - component: {fileID: 7183246209721081162}
+  m_Layer: 0
+  m_Name: Player SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7183246209721081173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183246209721081172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7183246209721081162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183246209721081172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e190c7ead07fb45b7c6ac7faa6807c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffects:
+    gameStart:
+      audioClip: {fileID: 8300000, guid: 45c06257084095e4d94363d6e2631cc7, type: 3}
+      volume: 1
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    gameSave:
+      audioClip: {fileID: 8300000, guid: e2193abda66e3814d8d381f0783eb93c, type: 3}
+      volume: 1
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    hitGround:
+      audioClip: {fileID: 8300000, guid: fb52e341a13a01b43acefa43c61171e3, type: 3}
+      volume: 0.509
+      volumeVariationPercent: 0.05
+      pitch: 0.936
+      pitchVariation: 0.05
+    switchMode:
+      audioClip: {fileID: 8300000, guid: 00469bcf6fa77c84690e8ac873527f12, type: 3}
+      volume: 1
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    playerHurt:
+      audioClip: {fileID: 8300000, guid: 3473c70382e7ae946a16bb0e64633b6a, type: 3}
+      volume: 0.728
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    playerDead:
+      audioClip: {fileID: 8300000, guid: a3c2d53b26c84b74e87dbf9749511d6b, type: 3}
+      volume: 0.877
+      volumeVariationPercent: 0.05
+      pitch: 0.644
+      pitchVariation: 0.05
+    unlockAbility:
+      audioClip: {fileID: 8300000, guid: 9da156e2a9c0d974db82051aa060d54a, type: 3}
+      volume: 1
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    killEnemy:
+      audioClip: {fileID: 8300000, guid: 0219f3bc4e75d444ba66db139ce5011c, type: 3}
+      volume: 1
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    dribble:
+      audioClip: {fileID: 8300000, guid: 4fc58111bde292c4eac7ffeffef2608c, type: 3}
+      volume: 1
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    boostBallCharge:
+      audioClip: {fileID: 8300000, guid: 34186fb3c1265bf44a8e700bca368621, type: 3}
+      volume: 0
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
+    boostBallRelease:
+      audioClip: {fileID: 8300000, guid: 0cd4afe1d94d33c4e8116d2a12f5d743, type: 3}
+      volume: 0.644
+      volumeVariationPercent: 0.05
+      pitch: 1.61
+      pitchVariation: 0.05
+    bugBlast:
+      audioClip: {fileID: 8300000, guid: b886a30db705b144ca73a295ba5cf9b8, type: 3}
+      volume: 0.611
+      volumeVariationPercent: 0.05
+      pitch: 1
+      pitchVariation: 0.05
