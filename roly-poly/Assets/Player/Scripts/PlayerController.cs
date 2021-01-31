@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> PlayerDeadEvent = delegate { };
     public static event Action<PlayerController> PlayerUpdateHealth = delegate { };
     public static event Action<AbilitiesToUnlock> PlayerUnlockedAbility = delegate { };
+    public static event Action<PlayerController> PlayerGotEgg = delegate { };
     public static event Action<PlayerController> PlayerInstantiatedEvent = delegate { };
     #endregion
 
@@ -300,6 +301,10 @@ public class PlayerController : MonoBehaviour
     {
         abilities.Unlock(ability);
         PlayerUnlockedAbility.Invoke(ability);
+        if (ability == AbilitiesToUnlock.Egg)
+        {
+            PlayerGotEgg.Invoke(this);
+        }
     }
 
     public void LoadPlayerAbilities(SaveData saveData)

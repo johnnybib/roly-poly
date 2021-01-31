@@ -24,6 +24,10 @@ public class GameplayController : GameStateController
         PlayerController.PlayerDeadEvent -= PlayerDiedHandler;
         PlayerController.PlayerUpdateHealth -= PlayerUpdateHealthHandler;
         PlayerController.PlayerUnlockedAbility -= PlayerUnlockedAbilityHandler;
+        PlayerController.PlayerGotEgg -= PlayerGotEggHandler;
+        PlayerController.PlayerWonEvent -= PlayerWonHandler;
+
+
 
     }
     public override void Enter()
@@ -42,6 +46,12 @@ public class GameplayController : GameStateController
     public HudController hudController;
     public Transform defaultSpawnPosition;
 
+    public DeathLava deathLava;
+
+    public AudioSource levelStartMusic;
+
+    public AudioSource lavaMusic;
+
     private bool paused;
 
     void Awake()
@@ -50,6 +60,8 @@ public class GameplayController : GameStateController
         PlayerController.PlayerDeadEvent += PlayerDiedHandler;
         PlayerController.PlayerUpdateHealth += PlayerUpdateHealthHandler;
         PlayerController.PlayerUnlockedAbility += PlayerUnlockedAbilityHandler;
+        PlayerController.PlayerGotEgg += PlayerGotEggHandler;
+        PlayerController.PlayerWonEvent += PlayerWonHandler;
 
 
         pauseUI.SetActive(false);
@@ -92,6 +104,18 @@ public class GameplayController : GameStateController
         hudController.UnlockAbility(ability);
     }
 
+    private void PlayerGotEggHandler(PlayerController p)
+    {
+        levelStartMusic.Stop();
+        lavaMusic.Play();
+        deathLava.StartRising();
+    }
+
+    private void PlayerWonHandler(PlayerController p)
+    {
+        Win();
+    }
+
     public void Pause()
     {
         //gameCamera.movementEnabled = false;//Stops camera shake when paused
@@ -113,8 +137,8 @@ public class GameplayController : GameStateController
 
     public void SaveAndQuit()
     {
-        Debug.Log("Save and quit!");
-        Save();
+        Debug.Log("Save is disabled!");
+        //Save();
         gameManager.EndGameplay();
     }
 
