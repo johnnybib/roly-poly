@@ -48,6 +48,9 @@ TagManager:
   - name: BG1
     uniqueID: 536622319
     locked: 0
+  - name: Decoration
+    uniqueID: 3619860719
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

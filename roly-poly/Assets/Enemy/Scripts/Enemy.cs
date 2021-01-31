@@ -59,7 +59,7 @@ public abstract class Enemy : MonoBehaviour
             //Player hit on head?
             PlayerPhysics physics = other.GetComponent<PlayerPhysics>();
             Debug.Log(physics.rb.velocity.magnitude);
-            if (physics.prevVel.magnitude > physics.killSpeed)
+            if (physics.CanKill())
             {
                 Debug.Log("Hit");
                 GetHit(1);

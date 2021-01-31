@@ -38,9 +38,9 @@ public class PlayerAnimations : MonoBehaviour
         anim.SetFloat("Speed", -Mathf.Abs(speed) * rollSpeedMultiplier);
     }
 
-    public void RotateCanKill(float rotation)
+    public void RotateCanKill(Quaternion rotation)
     {
-        canKillParticles.transform.localEulerAngles = new Vector3(0, 0, rotation);
+        canKillParticles.transform.rotation = rotation;
     }
     public void ShowCanKill()
     {

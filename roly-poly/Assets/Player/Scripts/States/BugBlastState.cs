@@ -15,7 +15,7 @@ public class BugBlastState : WalkingState
     }
     public override void StateEnter()
     {
-        p.physics.BugBlast(bugBlast.blastForce);
+        p.physics.BugBlast(new Vector2(p.inputs.horz, p.inputs.vert), bugBlast.blastForce);
         GameObject.Destroy(GameObject.Instantiate(bugBlast.bugBlastHitbox, p.physics.transform.position + p.physics.hitPointOffset, Quaternion.identity), 0.1f);
     }
 }
