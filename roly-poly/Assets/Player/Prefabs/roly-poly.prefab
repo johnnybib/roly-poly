@@ -444,10 +444,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc5c6e31e0518c47b0240b954234c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HEALTH_DEFAULT: 5
   physics: {fileID: 930852733142686289}
   animations: {fileID: 8283304838718951382}
   abilities: {fileID: 9151121544923289006}
   model: {fileID: 7549147419088319107}
+  health: 0
   isDebug: 0
   playerInput: {fileID: 7549147420423112193}
   stateID: 0

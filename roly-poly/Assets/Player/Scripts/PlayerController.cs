@@ -12,10 +12,16 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> PlayerDeadEvent = delegate { };
     public static event Action<PlayerController> PlayerInstantiatedEvent = delegate { };
     #endregion
+
+    #region Constants
+    public int HEALTH_DEFAULT;
+    #endregion
     public PlayerPhysics physics;
     public PlayerAnimations animations;
     public PlayerAbilities abilities;
     public GameObject model;
+    [HideInInspector]
+    public int health;
     public bool isDebug;
     public PlayerInput playerInput;
 
@@ -28,7 +34,7 @@ public class PlayerController : MonoBehaviour
         public bool releaseBoostBall;
         public bool bugBlast;
         public bool switchMode;
-        
+
     }
     public Inputs inputs;
 
@@ -59,13 +65,14 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         abilities.SetPlayerController(this);
-        abilities.UnlockAll();
         state = new IdleState(this);
         stateID = state.GetStateID();
         pause = false;
+        health = HEALTH_DEFAULT;
         if (isDebug)
         {
             playerInput.enabled = true;
+            abilities.UnlockAll();
         }
         else
         {
@@ -220,5 +227,14 @@ public class PlayerController : MonoBehaviour
     public void SetPause(bool pause)
     {
         this.pause = pause;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            PlayerDeadEvent.Invoke(this);
+        }
     }
 }

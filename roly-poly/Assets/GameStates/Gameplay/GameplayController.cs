@@ -21,6 +21,7 @@ public class GameplayController : GameStateController
             Unpause();
         }
         PlayerController.PlayerPressedStartEvent -= PlayerPressedStartHandler;
+        PlayerController.PlayerDeadEvent -= PlayerDiedHandler;
     }
     public override void Enter()
     {
@@ -33,6 +34,7 @@ public class GameplayController : GameStateController
     #endregion
 
     public GameObject pauseUI;
+    public GameObject deadUI;
     public Transform defaultSpawnPosition;
 
     private bool paused;
@@ -40,7 +42,9 @@ public class GameplayController : GameStateController
     void Awake()
     {
         PlayerController.PlayerPressedStartEvent += PlayerPressedStartHandler;
+        PlayerController.PlayerDeadEvent += PlayerDiedHandler;
         pauseUI.SetActive(false);
+        deadUI.SetActive(false);
     }
 
     void Start()
@@ -50,7 +54,9 @@ public class GameplayController : GameStateController
 
     private void PlayerDiedHandler(PlayerController sourcePlayer)
     {
-
+        gameManager.playerController.SetPause(true);
+        deadUI.SetActive(true);
+        Debug.Log("Player Died");
     }
 
     private void PlayerPressedStartHandler(PlayerController p)
@@ -92,6 +98,11 @@ public class GameplayController : GameStateController
         gameManager.EndGameplay();
     }
 
+    public void ReloadGameplay()
+    {
+        gameManager.StartGameplay(true);
+    }
+
     public void Save()
     {
         Debug.Log("Saving...");
@@ -113,6 +124,7 @@ public class GameplayController : GameStateController
     public void ResetPlayer()
     {
         gameManager.playerController.transform.position = defaultSpawnPosition.position;
+        gameManager.playerController.SetPause(false);
 
         if (gameManager.loadGameplayWithSaveData)
         {
@@ -128,5 +140,10 @@ public class GameplayController : GameStateController
             }
         }
 
+    }
+
+    public void DebugDoDamageToPlayer()
+    {
+        gameManager.playerController.TakeDamage(1);
     }
 }
