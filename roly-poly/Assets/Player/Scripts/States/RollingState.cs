@@ -12,7 +12,7 @@ public class RollingState : ActionableState
 
         if (p.IsInputHorz())
         {
-            p.physics.Roll(p.inputs.horz);
+            p.physics.Move(p.inputs.horz);
         }
         if(Mathf.Abs(p.physics.rb.velocity.x) > 0.1f)
         {

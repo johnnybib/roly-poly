@@ -19,8 +19,10 @@ public class PlayerPhysics : MonoBehaviour
     public float stopThreshold;
     public float walkFriction;
     public float rollFriction;
-    public float maxMoveSpeedWalk;
-    public float maxMoveSpeedRoll;
+    public float maxSpeedGroundedWalk;
+    public float maxSpeedGroundedRoll;
+    public float maxSpeedAerialRoll;
+    public float maxSpeedAerialWalk;
     public float switchBumpAmount;
     
     public float raycastDistRoll;
@@ -82,21 +84,13 @@ public class PlayerPhysics : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
 
     }
-    public void Roll(float dir)
+    public void Move(float dir)
     {
         rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
-        if(IsGrounded() && !isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll)
-            rb.velocity = rb.velocity.normalized * maxMoveSpeedRoll;
-        
+        float maxMoveSpeed = GetMaxSpeed();
+        if(!isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeed)
+            rb.velocity = rb.velocity.normalized * maxMoveSpeed;  
     }
-
-    public void Walk(float dir)
-    {
-        rb.AddForce(transform.right * dir * GetXAccel() * Time.fixedDeltaTime);
-        if(IsGrounded() && !isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
-            rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
-    }
-
     public void Bump(Vector2 dir, float force)
     {
         rb.AddForce(dir * force);
@@ -181,6 +175,24 @@ public class PlayerPhysics : MonoBehaviour
                 return xAccelAerialRoll;
             else
                 return xAccelAerialWalk;
+        }
+    }
+
+    public float GetMaxSpeed()
+    {
+        if(IsGrounded())
+        {
+            if(IsRoll())
+                return maxSpeedGroundedRoll;
+            else
+                return maxSpeedGroundedWalk;
+        }
+        else
+        {
+            if(IsRoll())
+                return maxSpeedAerialRoll;
+            else
+                return maxSpeedAerialWalk;
         }
     }
     public bool IsFalling()

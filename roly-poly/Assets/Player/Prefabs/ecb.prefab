@@ -122,8 +122,10 @@ MonoBehaviour:
   stopThreshold: 0.1
   walkFriction: 500
   rollFriction: 20
-  maxMoveSpeedWalk: 1
-  maxMoveSpeedRoll: 20
+  maxSpeedGroundedWalk: 1
+  maxSpeedGroundedRoll: 20
+  maxSpeedAerialRoll: 20
+  maxSpeedAerialWalk: 20
   switchBumpAmount: 400
   raycastDistRoll: 0.75
   raycastDistWalk: 0.5

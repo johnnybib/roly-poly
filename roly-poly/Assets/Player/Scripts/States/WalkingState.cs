@@ -10,7 +10,7 @@ public class WalkingState : ActionableState
         p.CheckFlip(p.inputs.horz);
         if (p.IsInputHorz())
         {
-            p.physics.Walk(p.inputs.horz);
+            p.physics.Move(p.inputs.horz);
         }
         else 
         {
