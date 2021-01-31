@@ -72,10 +72,13 @@ public class PlayerPhysics : MonoBehaviour
         }
         if(IsGrounded() && !isKnockback)
         {
-            if(isRoll)
+            if(IsRoll())
                 rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * rollFriction * Time.fixedDeltaTime);
             else
-                rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * walkFriction * Time.fixedDeltaTime);
+            {
+                rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * walkFriction * Time.fixedDeltaTime); 
+            }
+                
             if(Mathf.Abs(rb.velocity.magnitude) < stopThreshold) {
                 StopX();
             }
