@@ -41,10 +41,18 @@ public class BoostBallState : PlayerState
         }
         // Debug.Log("boost ball");
         // Debug.Log(chargeDuration);
-        p.physics.BoostBall(chargeDuration * boostBall.forcePerSecond);
+        p.physics.BoostBall(chargeDuration * boostBall.forcePerSecond, boostBall.duration);
+    }
+
+    public override void StateExit()
+    {
+        // p.physics.EnableGravity();
+        base.StateExit();
     }
     public override void StateEnter()
     {
+        // p.physics.Stop();
+        // p.physics.DisableGravity();
         chargeDuration = 0;
         if (GlobalSFX.Instance)
         {

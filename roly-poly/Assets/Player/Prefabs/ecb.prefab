@@ -116,7 +116,7 @@ MonoBehaviour:
   rollMat: {fileID: 6200000, guid: 0d73b8769e1d51648b08d52e995e4feb, type: 2}
   walkMat: {fileID: 6200000, guid: 3be28a5586ba1144bbd2fe5ddf5df8ef, type: 2}
   xAccelAerialRoll: 1000
-  xAccelGroundedRoll: 2700
+  xAccelGroundedRoll: 3500
   xAccelAerialWalk: 1000
   xAccelGroundedWalk: 2700
   stopThreshold: 0.1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BugBlast
   m_EditorClassIdentifier: 
   blastForce: 500
-  duration: 0.2
+  duration: 0.25
   bugBlastHitbox: {fileID: 6390621707464859021, guid: a4e9c1439dd59a24e9b747d1c194a1ca,
     type: 3}
