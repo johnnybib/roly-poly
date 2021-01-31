@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerPhysics : MonoBehaviour
 {
+ 
+    [HideInInspector]
+    public PlayerController p;
     public Rigidbody2D rb;
     public BoxCollider2D flatCollider;
     public CircleCollider2D rollCollider;
@@ -23,12 +26,17 @@ public class PlayerPhysics : MonoBehaviour
     public float raycastDistRoll;
     public float raycastDistWalk;
     
+    public Vector3 hitPointOffset;
+    public float knocbackTime;
+
     
     [SerializeField]
     private bool isRoll;
+
     private int facingDir;
     private bool isFalling;
     private bool isGrounded;
+    private bool isKnockback;
     private int GROUND_LAYER_MASK;
     private Quaternion ecbRotation;
 
@@ -45,6 +53,10 @@ public class PlayerPhysics : MonoBehaviour
         rollCollider.enabled = isRoll;
         ecbRotation = transform.localRotation;
     }
+    public void SetPlayerController(PlayerController p)
+    {
+        this.p = p;
+    }
     void FixedUpdate()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, IsRoll() ?  raycastDistRoll : raycastDistWalk, GROUND_LAYER_MASK);
@@ -56,7 +68,7 @@ public class PlayerPhysics : MonoBehaviour
             Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.yellow);
             isGrounded = false;
         }
-        if(isGrounded)
+        if(IsGrounded() && !isKnockback)
         {
             if(isRoll)
                 rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * rollFriction * Time.fixedDeltaTime);
@@ -67,27 +79,13 @@ public class PlayerPhysics : MonoBehaviour
             }
         }
         isFalling = rb.velocity.y < 0;
+        Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
 
     }
-    public void Move(float dir) 
-    {
-        
-        rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
-        if(isGrounded)
-        {
-            if(isRoll && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll){
-                rb.velocity = rb.velocity.normalized * maxMoveSpeedRoll;
-            }
-            else if(!isRoll && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk){
-                rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
-            }
-        }
-    }
-
     public void Roll(float dir)
     {
         rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
-        if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll)
+        if(IsGrounded() && !isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedRoll)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedRoll;
         
     }
@@ -95,7 +93,7 @@ public class PlayerPhysics : MonoBehaviour
     public void Walk(float dir)
     {
         rb.AddForce(transform.right * dir * GetXAccel() * Time.fixedDeltaTime);
-        if(isGrounded && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
+        if(IsGrounded() && !isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeedWalk)
             rb.velocity = rb.velocity.normalized * maxMoveSpeedWalk;
     }
 
@@ -105,10 +103,36 @@ public class PlayerPhysics : MonoBehaviour
     }
 
 
+    public void Knockback(Vector2 dir, float force)
+    {
+        rb.AddForce(dir * force);
+
+        StartCoroutine(KnockbackTimer(knocbackTime));
+    }
+
+    private IEnumerator KnockbackTimer(float time)
+    {
+        isKnockback = true;
+        yield return new WaitForSeconds(time);
+
+        isKnockback = false;   
+    }
+
+
     public void StopX()
     {
         rb.velocity = new Vector2(0, rb.velocity.y);
         rb.angularVelocity = 0;
+    }
+    public void StopY()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+    }
+
+    public void Stop()
+    {
+        StopX();
+        StopY();
     }
 
     public void ToggleRoll()
@@ -117,7 +141,7 @@ public class PlayerPhysics : MonoBehaviour
         flatCollider.enabled = !isRoll;
         rollCollider.enabled = isRoll;
         rb.sharedMaterial = isRoll ? rollMat : walkMat;
-        if(isGrounded)
+        if(IsGrounded())
         {
             Bump(Vector2.up, switchBumpAmount);
         }

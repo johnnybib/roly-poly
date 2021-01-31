@@ -11,6 +11,7 @@ public class BoostBallState : PlayerState
     private float chargeDuration = 0;
     public override PlayerState HandleInput()
     {
+        p.CheckFlip(p.inputs.horz);
         if(p.inputs.releaseBoostBall)
         {
             Boost();

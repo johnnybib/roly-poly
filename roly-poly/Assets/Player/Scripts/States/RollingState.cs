@@ -9,12 +9,20 @@ public class RollingState : ActionableState
 
     public override PlayerState Update()
     {
-        p.CheckFlip(Mathf.Sign(p.physics.rb.velocity.x));
+
         if (p.IsInputHorz())
         {
             p.physics.Roll(p.inputs.horz);
         }
-        p.animations.SetRollSpeed(p.physics.rb.velocity.magnitude * p.physics.GetFacingDir());
+        if(Mathf.Abs(p.physics.rb.velocity.x) > 0.1f)
+        {
+            p.CheckFlip(Mathf.Sign(p.physics.rb.velocity.x));
+            p.animations.SetRollSpeed(p.physics.rb.velocity.magnitude * p.physics.GetFacingDir());
+        }
+        else 
+        {
+            p.animations.SetRollSpeed(0);
+        }
         return base.Update();
     }
     public override void StateEnter()

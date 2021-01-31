@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5412011950357629249}
   m_Layer: 0
   m_Name: ecb
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10c41325a042fb459d77a0bfc6fa6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p: {fileID: 0}
   rb: {fileID: 1378727157025189332}
   flatCollider: {fileID: 3520586603660377579}
   rollCollider: {fileID: 8939080908176968265}
@@ -117,13 +118,15 @@ MonoBehaviour:
   xAccelAerialRoll: 2700
   xAccelGroundedRoll: 2700
   xAccelAerialWalk: 500
-  xAccelGroundedWalk: 2500
+  xAccelGroundedWalk: 2700
   stopThreshold: 0.1
-  walkFriction: 300
+  walkFriction: 500
   rollFriction: 20
   maxMoveSpeedWalk: 1
   maxMoveSpeedRoll: 20
   switchBumpAmount: 400
   raycastDistRoll: 0.75
   raycastDistWalk: 0.5
+  hitPointOffset: {x: 0, y: -0.4, z: 0}
+  knocbackTime: 0.2
   isRoll: 0

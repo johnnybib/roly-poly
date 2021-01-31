@@ -7,7 +7,6 @@ public class Zoomer : Enemy
     public float raycastDist;
     public Transform raycastPointL;
     public Transform raycastPointR;
-
     public float moveSpeed;
     public float rotationSpeed;
     public int moveDir;

@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     public PlayerPhysics physics;
     public PlayerAnimations animations;
     public PlayerAbilities abilities;
-    public GameObject playerDamageBox;
     public GameObject model;
     [HideInInspector]
     public int health;
@@ -66,6 +65,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         abilities.SetPlayerController(this);
+        physics.SetPlayerController(this);
         state = new IdleState(this);
         stateID = state.GetStateID();
         pause = false;
@@ -105,7 +105,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         model.transform.position = physics.rb.transform.position;
-        playerDamageBox.transform.position = physics.rb.transform.position;
         if (!physics.IsRoll())
             model.transform.localRotation = physics.rb.transform.localRotation;
         if (!pause)
@@ -206,7 +205,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Helpers
-    public void CheckFlip(float horz, bool stop = true)
+    public void CheckFlip(float horz)
     {
         if ((physics.GetFacingDir() == 1 && horz < 0) || (physics.GetFacingDir() == -1 && horz > 0))
         {
