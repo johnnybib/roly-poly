@@ -483,6 +483,8 @@ MonoBehaviour:
       unlocked: 0
       usedInAir: 0
       ability: {fileID: 11400000, guid: 461d2079b02358d4b8a0c3e2ef0b89bb, type: 2}
+    egg:
+      unlocked: 0
 --- !u!81 &1577677551858921433
 AudioListener:
   m_ObjectHideFlags: 0
@@ -521,7 +523,7 @@ PrefabInstance:
     - target: {fileID: 7141494659857911033, guid: 8fdbace66b026d541acd29bac184f4b1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 7141494659857911033, guid: 8fdbace66b026d541acd29bac184f4b1,
         type: 3}
@@ -581,7 +583,7 @@ PrefabInstance:
     - target: {fileID: 3070537980625280349, guid: d26d80f8f34350743bec556f958fb561,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3070537980625280349, guid: d26d80f8f34350743bec556f958fb561,
         type: 3}
