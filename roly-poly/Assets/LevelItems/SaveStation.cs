@@ -27,9 +27,10 @@ public class SaveStation : MonoBehaviour
         GameObject other = collider.gameObject;
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponentInParent<PlayerController>().abilities.abilities.egg.unlocked)
+            PlayerController p = other.GetComponentInParent<PlayerController>();
+            if (p.abilities.abilities.egg.unlocked)
             {
-
+                p.PlayerWin();
             }
             else
             {
@@ -38,7 +39,7 @@ public class SaveStation : MonoBehaviour
                 {
                     GlobalSFX.Instance.PlayGameSave();
                 }
-                Save(other.GetComponentInParent<PlayerController>());
+                Save(p);
             }
 
         }
