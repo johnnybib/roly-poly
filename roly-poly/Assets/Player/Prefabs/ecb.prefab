@@ -68,7 +68,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0000009536743, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -79,7 +79,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.936636, y: 0.4928577}
+  m_Size: {x: 0.5541439, y: 0.4928577}
   m_EdgeRadius: 0
 --- !u!58 &8939080908176968265
 CircleCollider2D:
@@ -117,7 +117,7 @@ MonoBehaviour:
   walkMat: {fileID: 6200000, guid: 3be28a5586ba1144bbd2fe5ddf5df8ef, type: 2}
   xAccelAerialRoll: 1000
   xAccelGroundedRoll: 2700
-  xAccelAerialWalk: 500
+  xAccelAerialWalk: 1000
   xAccelGroundedWalk: 2700
   stopThreshold: 0.1
   walkFriction: 500

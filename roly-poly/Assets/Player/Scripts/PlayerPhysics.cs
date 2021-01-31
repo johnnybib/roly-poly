@@ -43,6 +43,7 @@ public class PlayerPhysics : MonoBehaviour
     private bool isKnockback;
     private bool canKill;
     private int GROUND_LAYER_MASK;
+    private float gravityScale;
     private Quaternion ecbRotation;
 
 
@@ -50,6 +51,7 @@ public class PlayerPhysics : MonoBehaviour
     {
         GROUND_LAYER_MASK = 1 << LayerMask.NameToLayer("Ground");
         facingDir = -1;
+        gravityScale = rb.gravityScale;
     }
 
     void Start()
@@ -231,6 +233,14 @@ public class PlayerPhysics : MonoBehaviour
         return canKill;
     }
 
+    public void EnableGravity()
+    {
+        rb.gravityScale = gravityScale;
+    }
+    public void DisableGravity()
+    {
+        rb.gravityScale = 0;
+    }
 
     #region Ability Physics 
     public void Dribble(float force)
