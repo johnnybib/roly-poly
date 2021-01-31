@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     }
     public Inputs inputs;
     public bool isInvincible;
-    
+
 
     private PlayerState state;
 
@@ -92,6 +92,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         PlayerUpdateHealth(this);
+        if (GlobalSFX.Instance)
+        {
+            GlobalSFX.Instance.PlayGameStart();
+        }
         state.StateEnter();
     }
 
@@ -182,6 +186,7 @@ public class PlayerController : MonoBehaviour
     public void OnSwitchMode()
     {
         inputs.switchMode = true;
+
         HandleInput();
     }
 
@@ -244,10 +249,19 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        if (GlobalSFX.Instance)
+        {
+            GlobalSFX.Instance.PlayPlayerHurt();
+        }
         PlayerUpdateHealth(this);
         if (currentHealth <= 0)
         {
+            if (GlobalSFX.Instance)
+            {
+                GlobalSFX.Instance.PlayPlayerDead();
+            }
             PlayerDeadEvent.Invoke(this);
+
         }
     }
     public void SetInvicible(bool invincible)
@@ -266,7 +280,7 @@ public class PlayerController : MonoBehaviour
         Color playerColor = animations.sprite.color;
         Color flashColor = playerColor;
         flashColor.a = 0.25f;
-        while(timer < INVINCIBLE_DURATION)
+        while (timer < INVINCIBLE_DURATION)
         {
             animations.sprite.color = flashColor;
             yield return new WaitForSeconds(0.1f);

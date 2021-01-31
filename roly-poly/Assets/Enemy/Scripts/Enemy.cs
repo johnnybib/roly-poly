@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
-{   
+{
     public int maxHealth;
     public int damage;
     public float knockbackForce;
@@ -17,14 +17,18 @@ public abstract class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
     public void Die()
-    {   
+    {
         Destroy(gameObject, 0.1f);
     }
     public void GetHit(int damage)
     {
+        if (GlobalSFX.Instance)
+        {
+            GlobalSFX.Instance.PlayKillEnemy();
+        }
         currentHealth -= damage;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             currentHealth = 0;
             Die();
@@ -35,12 +39,12 @@ public abstract class Enemy : MonoBehaviour
     {
         Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
     }
-    
+
     //Damaging hitbox
     void OnTriggerEnter2D(Collider2D collider)
     {
         GameObject other = collider.gameObject;
-        if(other.CompareTag("playerDamageBox"))
+        if (other.CompareTag("playerDamageBox"))
         {
             GetHit(1);
         }
@@ -50,12 +54,12 @@ public abstract class Enemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject other = collision.gameObject;
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             //Player hit on head?
             PlayerPhysics physics = other.GetComponent<PlayerPhysics>();
             Debug.Log(physics.rb.velocity.magnitude);
-            if(physics.prevVel.magnitude > physics.killSpeed)
+            if (physics.prevVel.magnitude > physics.killSpeed)
             {
                 Debug.Log("Hit");
                 GetHit(1);
@@ -64,7 +68,7 @@ public abstract class Enemy : MonoBehaviour
             // {
 
             // }//Else do damage
-            else if(!physics.p.IsInvincible())
+            else if (!physics.p.IsInvincible())
             {
                 physics.p.TakeDamage(damage);
                 physics.Knockback(new Vector2(knockbackDir.x * Mathf.Sign(physics.transform.position.x - transform.position.x), knockbackDir.y), knockbackForce);
@@ -72,5 +76,5 @@ public abstract class Enemy : MonoBehaviour
             }
         }
     }
-    
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPhysics : MonoBehaviour
 {
- 
+
     [HideInInspector]
     public PlayerController p;
     public Rigidbody2D rb;
@@ -24,16 +24,16 @@ public class PlayerPhysics : MonoBehaviour
     public float maxSpeedAerialRoll;
     public float maxSpeedAerialWalk;
     public float switchBumpAmount;
-    
+
     public float raycastDistRoll;
     public float raycastDistWalk;
     public float killSpeed;
-    
+
     public Vector3 hitPointOffset;
     public float knocbackTime;
     [HideInInspector]
     public Vector2 prevVel;
-    
+
     [SerializeField]
     private bool isRoll;
 
@@ -64,34 +64,43 @@ public class PlayerPhysics : MonoBehaviour
     void FixedUpdate()
     {
         // Debug.Log(rb.velocity.magnitude);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, IsRoll() ?  raycastDistRoll : raycastDistWalk, GROUND_LAYER_MASK);
-        if(hit.collider != null) {
-            Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.red);
-            if(!IsGrounded() && IsRoll() && rb.velocity.magnitude > 8f)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, IsRoll() ? raycastDistRoll : raycastDistWalk, GROUND_LAYER_MASK);
+        if (hit.collider != null)
+        {
+            Debug.DrawRay(transform.position, Vector2.down * (IsRoll() ? raycastDistRoll : raycastDistWalk), Color.red);
+            if (!IsGrounded() && IsRoll() && rb.velocity.magnitude > 8f)
+            {
                 p.animations.PlayLandingParticles(hit.point);
+                if (GlobalSFX.Instance)
+                {
+                    GlobalSFX.Instance.PlayHitGround();
+                }
+            }
             isGrounded = true;
         }
-        else {
-            Debug.DrawRay(transform.position, Vector2.down * ( IsRoll() ?  raycastDistRoll : raycastDistWalk), Color.yellow);
+        else
+        {
+            Debug.DrawRay(transform.position, Vector2.down * (IsRoll() ? raycastDistRoll : raycastDistWalk), Color.yellow);
             isGrounded = false;
         }
-        if(IsGrounded() && !isKnockback)
+        if (IsGrounded() && !isKnockback)
         {
-            if(IsRoll())
+            if (IsRoll())
                 rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * rollFriction * Time.fixedDeltaTime);
             else
             {
-                rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * walkFriction * Time.fixedDeltaTime); 
+                rb.AddForce(Vector2.right * -Mathf.Sign(rb.velocity.x) * walkFriction * Time.fixedDeltaTime);
             }
-                
-            if(Mathf.Abs(rb.velocity.magnitude) < stopThreshold) {
+
+            if (Mathf.Abs(rb.velocity.magnitude) < stopThreshold)
+            {
                 StopX();
             }
         }
         isFalling = rb.velocity.y < 0;
         Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
         prevVel = rb.velocity;
-        if(prevVel.magnitude > killSpeed)
+        if (prevVel.magnitude > killSpeed)
         {
             p.animations.ShowCanKill();
         }
@@ -106,8 +115,8 @@ public class PlayerPhysics : MonoBehaviour
     {
         rb.AddForce(Vector2.right * dir * GetXAccel() * Time.fixedDeltaTime);
         float maxMoveSpeed = GetMaxSpeed();
-        if(!isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeed)
-            rb.velocity = rb.velocity.normalized * maxMoveSpeed;  
+        if (!isKnockback && Mathf.Abs(rb.velocity.magnitude) > maxMoveSpeed)
+            rb.velocity = rb.velocity.normalized * maxMoveSpeed;
     }
     public void Bump(Vector2 dir, float force)
     {
@@ -127,7 +136,7 @@ public class PlayerPhysics : MonoBehaviour
         isKnockback = true;
         yield return new WaitForSeconds(time);
 
-        isKnockback = false;   
+        isKnockback = false;
     }
 
 
@@ -153,7 +162,7 @@ public class PlayerPhysics : MonoBehaviour
         flatCollider.enabled = !isRoll;
         rollCollider.enabled = isRoll;
         rb.sharedMaterial = isRoll ? rollMat : walkMat;
-        if(IsGrounded())
+        if (IsGrounded())
         {
             Bump(Vector2.up, switchBumpAmount);
         }
@@ -180,16 +189,16 @@ public class PlayerPhysics : MonoBehaviour
 
     public float GetXAccel()
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
-            if(IsRoll())
+            if (IsRoll())
                 return xAccelGroundedRoll;
             else
                 return xAccelGroundedWalk;
         }
         else
         {
-            if(IsRoll())
+            if (IsRoll())
                 return xAccelAerialRoll;
             else
                 return xAccelAerialWalk;
@@ -198,16 +207,16 @@ public class PlayerPhysics : MonoBehaviour
 
     public float GetMaxSpeed()
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
-            if(IsRoll())
+            if (IsRoll())
                 return maxSpeedGroundedRoll;
             else
                 return maxSpeedGroundedWalk;
         }
         else
         {
-            if(IsRoll())
+            if (IsRoll())
                 return maxSpeedAerialRoll;
             else
                 return maxSpeedAerialWalk;
@@ -217,7 +226,7 @@ public class PlayerPhysics : MonoBehaviour
     {
         return isFalling;
     }
-    
+
     public void ResetRotation()
     {
         transform.localRotation = ecbRotation;
@@ -231,12 +240,16 @@ public class PlayerPhysics : MonoBehaviour
     }
 
     public void BoostBall(float boostForce)
-    {       
+    {
         rb.AddForce(Vector2.right * boostForce * GetFacingDir());
     }
 
     public void BugBlast(float blastForce)
     {
+        if (GlobalSFX.Instance)
+        {
+            GlobalSFX.Instance.PlayBugBlast();
+        }
         rb.AddForce(Vector2.up * blastForce);
     }
     #endregion
