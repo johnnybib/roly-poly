@@ -12,7 +12,7 @@ public class SaveStation : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         GameObject other = collider.gameObject;
-        if (other.CompareTag("playerDamageBox"))
+        if (other.CompareTag("Player"))
         {
             Debug.Log("Saving at Save Station!");
             Save(other.GetComponentInParent<PlayerController>());

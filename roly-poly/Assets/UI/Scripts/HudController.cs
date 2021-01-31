@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HudController : MonoBehaviour
 {
+    public List<GameObject> abilityIcons;
+    public GameObject healthIconParent;
     public GameObject healthIconPrefab;
     private Dictionary<int, HealthIcon> healthIcons; // Uses 1 as base index
     private int currentHealth = 0;
@@ -13,6 +15,10 @@ public class HudController : MonoBehaviour
     void Start()
     {
         healthIcons = new Dictionary<int, HealthIcon>();
+        foreach (GameObject obj in abilityIcons)
+        {
+            obj.SetActive(false);
+        }
     }
 
     public void SetMaxHealth(int maxHealth)
@@ -26,7 +32,7 @@ public class HudController : MonoBehaviour
             for (int i = healthIcons.Count + 1; i <= maxHealth; i++)
             {
                 GameObject newIconObject = Instantiate(healthIconPrefab);
-                newIconObject.transform.parent = this.transform;
+                newIconObject.transform.parent = healthIconParent.transform;
 
                 healthIcons.Add(i, newIconObject.GetComponent<HealthIcon>());
             }
@@ -59,6 +65,11 @@ public class HudController : MonoBehaviour
                 healthIcons[i].SetFull();
             }
         }
+    }
+
+    public void UnlockAbility(AbilitiesToUnlock ability)
+    {
+        abilityIcons[(int)ability].SetActive(true);
     }
 
 }

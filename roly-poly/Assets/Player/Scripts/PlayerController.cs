@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> PlayerWonEvent = delegate { };
     public static event Action<PlayerController> PlayerDeadEvent = delegate { };
     public static event Action<PlayerController> PlayerUpdateHealth = delegate { };
+    public static event Action<AbilitiesToUnlock> PlayerUnlockedAbility = delegate { };
     public static event Action<PlayerController> PlayerInstantiatedEvent = delegate { };
     #endregion
 
@@ -244,5 +245,36 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDeadEvent.Invoke(this);
         }
+    }
+
+    public void UnlockAbility(AbilitiesToUnlock ability)
+    {
+        abilities.Unlock(ability);
+        PlayerUnlockedAbility.Invoke(ability);
+    }
+
+    public void LoadPlayerAbilities(SaveData saveData)
+    {
+        if (saveData.dribbleUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.Dribble);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.Dribble);
+        }
+        else if (saveData.boostBallUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.BoostBall);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.BoostBall);
+        }
+        else if (saveData.stickyFeetUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.StickyFeet);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.StickyFeet);
+        }
+        else if (saveData.bugBlastUnlock)
+        {
+            abilities.Unlock(AbilitiesToUnlock.BugBlast);
+            PlayerUnlockedAbility.Invoke(AbilitiesToUnlock.BugBlast);
+        }
+
     }
 }

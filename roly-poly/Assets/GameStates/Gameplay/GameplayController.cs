@@ -23,6 +23,7 @@ public class GameplayController : GameStateController
         PlayerController.PlayerPressedStartEvent -= PlayerPressedStartHandler;
         PlayerController.PlayerDeadEvent -= PlayerDiedHandler;
         PlayerController.PlayerUpdateHealth -= PlayerUpdateHealthHandler;
+        PlayerController.PlayerUnlockedAbility -= PlayerUnlockedAbilityHandler;
 
     }
     public override void Enter()
@@ -48,6 +49,8 @@ public class GameplayController : GameStateController
         PlayerController.PlayerPressedStartEvent += PlayerPressedStartHandler;
         PlayerController.PlayerDeadEvent += PlayerDiedHandler;
         PlayerController.PlayerUpdateHealth += PlayerUpdateHealthHandler;
+        PlayerController.PlayerUnlockedAbility += PlayerUnlockedAbilityHandler;
+
 
         pauseUI.SetActive(false);
         deadUI.SetActive(false);
@@ -82,6 +85,11 @@ public class GameplayController : GameStateController
     {
         hudController.SetMaxHealth(p.maxHealth);
         hudController.SetCurrentHealth(p.currentHealth);
+    }
+
+    private void PlayerUnlockedAbilityHandler(AbilitiesToUnlock ability)
+    {
+        hudController.UnlockAbility(ability);
     }
 
     public void Pause()
@@ -139,11 +147,7 @@ public class GameplayController : GameStateController
             SaveData saveData = SaveSystem.LoadFile();
             if (saveData != null)
             {
-                gameManager.playerController.abilities.abilities.dribble.unlocked = saveData.dribbleUnlock;
-                gameManager.playerController.abilities.abilities.stickyFeet.unlocked = saveData.stickyFeetUnlock;
-                gameManager.playerController.abilities.abilities.boostBall.unlocked = saveData.boostBallUnlock;
-                gameManager.playerController.abilities.abilities.bugBlast.unlocked = saveData.bugBlastUnlock;
-
+                gameManager.playerController.LoadPlayerAbilities(saveData);
             }
         }
 
