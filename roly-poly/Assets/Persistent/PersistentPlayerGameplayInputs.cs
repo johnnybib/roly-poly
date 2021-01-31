@@ -43,4 +43,10 @@ public class PersistentPlayerGameplayInputs : MonoBehaviour
         if (canInput)
             playerInputManager.OnWest(context);
     }
+
+    public void OnK(InputAction.CallbackContext context)
+    {
+        if (canInput)
+            playerInputManager.OnEast(context);
+    }
 }
