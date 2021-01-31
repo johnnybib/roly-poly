@@ -11,14 +11,17 @@ public class HudController : MonoBehaviour
     private Dictionary<int, HealthIcon> healthIcons; // Uses 1 as base index
     private int currentHealth = 0;
     private int maxHealth = 0;
-
-    void Start()
+    void Awake()
     {
-        healthIcons = new Dictionary<int, HealthIcon>();
         foreach (GameObject obj in abilityIcons)
         {
             obj.SetActive(false);
         }
+    }
+    void Start()
+    {
+        healthIcons = new Dictionary<int, HealthIcon>();
+
     }
 
     public void SetMaxHealth(int maxHealth)
