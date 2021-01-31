@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public PlayerPhysics physics;
     public PlayerAnimations animations;
     public PlayerAbilities abilities;
+    public GameObject playerDamageBox;
     public GameObject model;
     [HideInInspector]
     public int health;
@@ -93,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeState(PlayerState newState)
     {
-        Debug.Log(string.Format("state {0} to {1}", state.GetStateID(), newState.GetStateID()));
+        // Debug.Log(string.Format("state {0} to {1}", state.GetStateID(), newState.GetStateID()));
         state.StateExit();
         state = newState;
         stateID = state.GetStateID();//For debugging purposes
@@ -104,6 +105,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         model.transform.position = physics.rb.transform.position;
+        playerDamageBox.transform.position = physics.rb.transform.position;
         if (!physics.IsRoll())
             model.transform.localRotation = physics.rb.transform.localRotation;
         if (!pause)
