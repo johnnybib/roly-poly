@@ -41,6 +41,7 @@ public class PlayerPhysics : MonoBehaviour
     private bool isFalling;
     private bool isGrounded;
     private bool isKnockback;
+    private bool canKill;
     private int GROUND_LAYER_MASK;
     private Quaternion ecbRotation;
 
@@ -91,15 +92,17 @@ public class PlayerPhysics : MonoBehaviour
         isFalling = rb.velocity.y < 0;
         Debug.DrawLine(transform.position, transform.position + hitPointOffset, Color.green);
         prevVel = rb.velocity;
-        if(prevVel.magnitude > killSpeed)
+        if(prevVel.magnitude > killSpeed && IsRoll())
         {
+            canKill = true;
+            p.animations.RotateCanKill(Quaternion.LookRotation(rb.velocity.normalized) * Quaternion.FromToRotation(Vector3.right, Vector3.forward) * Quaternion.FromToRotation(Vector3.right, Vector3.up));
             p.animations.ShowCanKill();
         }
         else
         {
+            canKill = false;
             p.animations.HideCanKill();
         }
-        p.animations.RotateCanKill(Vector2.Angle(Vector2.down, rb.velocity) + 180);
 
     }
     public void Move(float dir)
@@ -223,6 +226,11 @@ public class PlayerPhysics : MonoBehaviour
         transform.localRotation = ecbRotation;
     }
 
+    public bool CanKill()
+    {
+        return canKill;
+    }
+
 
     #region Ability Physics 
     public void Dribble(float force)
@@ -235,9 +243,13 @@ public class PlayerPhysics : MonoBehaviour
         rb.AddForce(Vector2.right * boostForce * GetFacingDir());
     }
 
-    public void BugBlast(float blastForce)
+    public void BugBlast(Vector2 dir, float blastForce)
     {
-        rb.AddForce(Vector2.up * blastForce);
+        if(IsGrounded() && dir.x != 0)
+            dir.x = 0;
+        if(dir == Vector2.zero)
+            dir = Vector2.up;
+        rb.AddForce(dir * blastForce);
     }
     #endregion
 
