@@ -41,8 +41,10 @@ public class PlayerPhysics : MonoBehaviour
     private bool isFalling;
     private bool isGrounded;
     private bool isKnockback;
+    private bool isBoostball;
     private bool canKill;
     private int GROUND_LAYER_MASK;
+    private float gravityScale;
     private Quaternion ecbRotation;
 
 
@@ -50,6 +52,7 @@ public class PlayerPhysics : MonoBehaviour
     {
         GROUND_LAYER_MASK = 1 << LayerMask.NameToLayer("Ground");
         facingDir = -1;
+        gravityScale = rb.gravityScale;
     }
 
     void Start()
@@ -210,6 +213,9 @@ public class PlayerPhysics : MonoBehaviour
 
     public float GetMaxSpeed()
     {
+        if(isBoostball){
+            return Mathf.Infinity;
+        }
         if (IsGrounded())
         {
             if (IsRoll())
@@ -240,6 +246,14 @@ public class PlayerPhysics : MonoBehaviour
         return canKill;
     }
 
+    public void EnableGravity()
+    {
+        rb.gravityScale = gravityScale;
+    }
+    public void DisableGravity()
+    {
+        rb.gravityScale = 0;
+    }
 
     #region Ability Physics 
     public void Dribble(float force)
@@ -247,10 +261,21 @@ public class PlayerPhysics : MonoBehaviour
         rb.AddForce(Vector2.down * force);
     }
 
-    public void BoostBall(float boostForce)
+    public void BoostBall(float boostForce, float duration)
     {
         rb.AddForce(Vector2.right * boostForce * GetFacingDir());
+
+        StartCoroutine(BoostballTimer(duration));
     }
+
+    private IEnumerator BoostballTimer(float time)
+    {
+        isBoostball = true;
+        yield return new WaitForSeconds(time);
+
+        isBoostball = false;
+    }
+
 
     public void BugBlast(Vector2 dir, float blastForce)
     {

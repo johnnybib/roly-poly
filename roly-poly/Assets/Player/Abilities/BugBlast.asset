@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa35181a95d65f48899a690411237af, type: 3}
   m_Name: BugBlast
   m_EditorClassIdentifier: 
-  blastForce: 1000
+  blastForce: 500
+  duration: 0.25
   bugBlastHitbox: {fileID: 6390621707464859021, guid: a4e9c1439dd59a24e9b747d1c194a1ca,
     type: 3}

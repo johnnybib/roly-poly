@@ -70,7 +70,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             return new BoostBallState(p, abilities.boostBall.ability);
         }
-        else if (p.inputs.bugBlast && abilities.bugBlast.unlocked && !abilities.bugBlast.usedInAir && !p.physics.IsRoll())
+        else if (p.inputs.bugBlast && abilities.bugBlast.unlocked && !abilities.bugBlast.usedInAir && !p.physics.IsGrounded())
         {
             abilities.bugBlast.usedInAir = true;
             return new BugBlastState(p, abilities.bugBlast.ability);
