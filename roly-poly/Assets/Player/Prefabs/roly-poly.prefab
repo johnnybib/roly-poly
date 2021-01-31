@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HEALTH_DEFAULT: 5
+  INVINCIBLE_DURATION: 1
   physics: {fileID: 930852733142686289}
   animations: {fileID: 8283304838718951382}
   abilities: {fileID: 9151121544923289006}
@@ -452,6 +453,7 @@ MonoBehaviour:
   health: 0
   isDebug: 0
   playerInput: {fileID: 7549147420423112193}
+  isInvincible: 0
   stateID: 0
 --- !u!114 &9151121544923289006
 MonoBehaviour:

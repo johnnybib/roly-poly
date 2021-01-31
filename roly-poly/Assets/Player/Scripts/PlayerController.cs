@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     #region Constants
     public int HEALTH_DEFAULT;
+    public float INVINCIBLE_DURATION;
     #endregion
     public PlayerPhysics physics;
     public PlayerAnimations animations;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
 
     }
     public Inputs inputs;
+    public bool isInvincible;
+    
 
     private PlayerState state;
 
@@ -160,6 +163,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
     #region Input Handling
     public void OnStick(Vector2 dir)
     {
@@ -237,5 +241,36 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDeadEvent.Invoke(this);
         }
+    }
+    public void SetInvicible(bool invincible)
+    {
+        this.isInvincible = invincible;
+    }
+    public void SetTempInvincible()
+    {
+        SetInvicible(true);
+        StartCoroutine(StartInvincibleReset());
+    }
+
+    private IEnumerator StartInvincibleReset()
+    {
+        float timer = 0;
+        Color playerColor = animations.sprite.color;
+        Color flashColor = playerColor;
+        flashColor.a = 0.25f;
+        while(timer < INVINCIBLE_DURATION)
+        {
+            animations.sprite.color = flashColor;
+            yield return new WaitForSeconds(0.1f);
+            animations.sprite.color = playerColor;
+            timer += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+            timer += 0.1f;
+        }
+        SetInvicible(false);
+    }
+    public bool IsInvincible()
+    {
+        return isInvincible;
     }
 }

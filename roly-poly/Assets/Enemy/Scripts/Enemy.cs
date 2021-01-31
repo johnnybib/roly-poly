@@ -60,11 +60,12 @@ public abstract class Enemy : MonoBehaviour
                 Debug.Log("Hit");
                 GetHit(1);
             }//Else do damage
-            else
+            else if(!physics.p.IsInvincible())
             {
                 Debug.Log("Take damage");
                 physics.p.TakeDamage(damage);
                 physics.Knockback(new Vector2(knockbackDir.x * Mathf.Sign(physics.transform.position.x - transform.position.x), knockbackDir.y), knockbackForce);
+                physics.p.SetTempInvincible();
             }
         }
     }

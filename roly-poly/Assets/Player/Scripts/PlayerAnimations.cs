@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
     public Animator anim;
+    public SpriteRenderer sprite;
     public int flipSprite;
     public float rollSpeedMultiplier;
     private Vector3 modelScale;
