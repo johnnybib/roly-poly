@@ -6,4 +6,6 @@ public class BoostBall : ScriptableObject
 {
     public float forcePerSecond;
     public float maxChargeTime;
+
+    public float duration;
 }
