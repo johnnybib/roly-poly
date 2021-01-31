@@ -10,6 +10,7 @@ public class PlayerAnimations : MonoBehaviour
     public int flipSprite;
     public float rollSpeedMultiplier;
     public GameObject canKillParticles;
+    public GameObject bugBlastParticles;
     public GameObject landingParticles;
     private Vector3 modelScale;
     private Quaternion modelRotation;
@@ -54,6 +55,12 @@ public class PlayerAnimations : MonoBehaviour
     public void PlayLandingParticles(Vector2 position)
     {
         Destroy(Instantiate(landingParticles, position, Quaternion.identity), 0.2833f);
+    }
+    
+    public void PlayBugBlastParticles(Quaternion rotation)
+    {
+        GameObject bugblastpart = Instantiate(bugBlastParticles, transform.position, rotation);
+        Destroy(bugblastpart, 0.2f);
     }
     public void ClearAnimTriggers()
     {

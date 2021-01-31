@@ -33,6 +33,10 @@ public class BugBlastState : WalkingState
         p.animations.Play("BugBlast");
         p.physics.Stop();
         p.physics.BugBlast(new Vector2(p.inputs.horz, p.inputs.vert), bugBlast.blastForce);
+        if(p.inputs.horz != 0)
+            p.animations.PlayBugBlastParticles(Quaternion.LookRotation(new Vector2(p.inputs.horz, p.inputs.vert)) * Quaternion.FromToRotation(Vector3.forward, Vector3.right));
+        else
+            p.animations.PlayBugBlastParticles(Quaternion.LookRotation(new Vector2(p.inputs.horz, p.inputs.vert)) * Quaternion.FromToRotation(Vector3.up, Vector3.right));
         // GameObject.Destroy(GameObject.Instantiate(bugBlast.bugBlastHitbox, p.physics.transform.position + p.physics.hitPointOffset, Quaternion.identity), 0.1f);
         p.physics.DisableGravity();
     }

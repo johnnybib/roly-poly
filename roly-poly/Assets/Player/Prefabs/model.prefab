@@ -134,6 +134,8 @@ MonoBehaviour:
   flipSprite: 1
   rollSpeedMultiplier: 0.05
   canKillParticles: {fileID: 4288169019594125137}
+  bugBlastParticles: {fileID: 187990810006285469, guid: 53d78f5736a4ae94db8adf982111e29c,
+    type: 3}
   landingParticles: {fileID: 6156134355223600319, guid: 0a98023cab4b7d748bd30dbfdbf7d70a,
     type: 3}
 --- !u!95 &374163485028815146

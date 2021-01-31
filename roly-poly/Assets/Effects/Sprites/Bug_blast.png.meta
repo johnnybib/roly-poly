@@ -134,9 +134,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 32
-        height: 32
+        y: 0
+        width: 43.714287
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +154,10 @@ TextureImporter:
       name: Bug_blast_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 10
-        width: 32
-        height: 32
+        x: 43
+        y: 0
+        width: 43.714287
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,10 +175,10 @@ TextureImporter:
       name: Bug_blast_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 10
-        width: 32
-        height: 32
+        x: 86
+        y: 0
+        width: 43.714287
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,10 +196,10 @@ TextureImporter:
       name: Bug_blast_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 10
-        width: 32
-        height: 32
+        x: 129
+        y: 0
+        width: 43.714287
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,10 +217,10 @@ TextureImporter:
       name: Bug_blast_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 10
-        width: 32
-        height: 32
+        x: 174
+        y: 0
+        width: 44
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,10 +238,10 @@ TextureImporter:
       name: Bug_blast_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 10
-        width: 32
-        height: 32
+        x: 218
+        y: 0
+        width: 44
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,10 +259,10 @@ TextureImporter:
       name: Bug_blast_6
       rect:
         serializedVersion: 2
-        x: 192
-        y: 10
-        width: 32
-        height: 32
+        x: 262
+        y: 0
+        width: 44
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,48 +272,6 @@ TextureImporter:
       bones: []
       spriteID: 4ea812909bb820420800000000000000
       internalID: 2594789962157230820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bug_blast_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 10
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b53c924ae50d3d70800000000000000
-      internalID: 9024375732018361781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bug_blast_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 10
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b0bbf1fd14d4dcc70800000000000000
-      internalID: 8992928976240360203
       vertices: []
       indices: 
       edges: []
