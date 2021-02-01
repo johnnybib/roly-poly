@@ -12,6 +12,10 @@ public static class SaveSystem
         saveData.stickyFeetUnlock = player.abilities.abilities.stickyFeet.unlocked;
         saveData.boostBallUnlock = player.abilities.abilities.boostBall.unlocked;
         saveData.bugBlastUnlock = player.abilities.abilities.bugBlast.unlocked;
+        saveData.savePositionX = player.physics.transform.position.x;
+        saveData.savePositionY = player.physics.transform.position.y;
+        saveData.savePositionZ = player.physics.transform.position.z;
+
         SaveSystem.SaveFile(saveData);
     }
     public static void SaveFile(SaveData data)

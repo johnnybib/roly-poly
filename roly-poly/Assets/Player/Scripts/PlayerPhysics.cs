@@ -213,7 +213,8 @@ public class PlayerPhysics : MonoBehaviour
 
     public float GetMaxSpeed()
     {
-        if(isBoostball){
+        if (isBoostball)
+        {
             return Mathf.Infinity;
         }
         if (IsGrounded())
@@ -285,8 +286,9 @@ public class PlayerPhysics : MonoBehaviour
         }
         if (IsGrounded() && dir.x != 0)
             dir.x = 0;
-        if (dir == Vector2.zero)
+        if (Mathf.Abs(dir.x) < 0.5 && Mathf.Abs(dir.y) < 0.5)
             dir = Vector2.up;
+        Debug.Log(dir);
         rb.AddForce(dir * blastForce);
     }
     #endregion

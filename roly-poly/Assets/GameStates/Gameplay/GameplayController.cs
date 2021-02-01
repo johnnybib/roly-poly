@@ -49,6 +49,7 @@ public class GameplayController : GameStateController
     public DeathLava deathLava;
 
     public AudioSource levelStartMusic;
+    public AudioSource levelMiddleMusic;
 
     public AudioSource lavaMusic;
 
@@ -102,11 +103,17 @@ public class GameplayController : GameStateController
     private void PlayerUnlockedAbilityHandler(AbilitiesToUnlock ability)
     {
         hudController.UnlockAbility(ability);
+        if (AbilitiesToUnlock.BoostBall == ability)
+        {
+            levelStartMusic.Stop();
+            levelMiddleMusic.Play();
+        }
     }
 
     private void PlayerGotEggHandler(PlayerController p)
     {
         levelStartMusic.Stop();
+        levelMiddleMusic.Stop();
         lavaMusic.Play();
         deathLava.StartRising();
     }
@@ -162,7 +169,6 @@ public class GameplayController : GameStateController
 
     public void ResetPlayer()
     {
-        gameManager.playerController.transform.position = defaultSpawnPosition.position;
         gameManager.playerController.SetPause(false);
 
         if (gameManager.loadGameplayWithSaveData)
@@ -172,7 +178,23 @@ public class GameplayController : GameStateController
             if (saveData != null)
             {
                 gameManager.playerController.LoadPlayerAbilities(saveData);
+                Vector3 newPos = new Vector3(saveData.savePositionX, saveData.savePositionY, saveData.savePositionZ);
+                gameManager.playerController.physics.transform.position = newPos;
+                gameManager.playerController.animations.transform.position = newPos;
             }
+            else
+            {
+                gameManager.playerController.physics.transform.position = defaultSpawnPosition.position;
+                gameManager.playerController.animations.transform.position = defaultSpawnPosition.position;
+
+
+            }
+        }
+        else
+        {
+            gameManager.playerController.physics.transform.position = defaultSpawnPosition.position;
+            gameManager.playerController.animations.transform.position = defaultSpawnPosition.position;
+
         }
 
     }

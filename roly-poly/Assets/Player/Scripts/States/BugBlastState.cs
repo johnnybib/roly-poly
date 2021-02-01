@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BugBlastState : WalkingState
 {
-    public BugBlastState(PlayerController p, BugBlast bugBlast) : base(p, StateID.BugBlast) {
-        this.bugBlast = bugBlast;   
+    public BugBlastState(PlayerController p, BugBlast bugBlast) : base(p, StateID.BugBlast)
+    {
+        this.bugBlast = bugBlast;
         timer = 0;
     }
     private BugBlast bugBlast;
@@ -14,7 +15,7 @@ public class BugBlastState : WalkingState
     public override PlayerState Update()
     {
         timer += Time.fixedDeltaTime;
-        if(timer > bugBlast.duration)
+        if (timer > bugBlast.duration)
         {
             p.animations.ResetRotation();
             p.physics.ToggleRoll();
@@ -33,7 +34,7 @@ public class BugBlastState : WalkingState
         p.animations.Play("BugBlast");
         p.physics.Stop();
         p.physics.BugBlast(new Vector2(p.inputs.horz, p.inputs.vert), bugBlast.blastForce);
-        if(p.inputs.horz != 0)
+        if (Mathf.Abs(p.inputs.horz) > 0.5)
             p.animations.PlayBugBlastParticles(Quaternion.LookRotation(new Vector2(p.inputs.horz, p.inputs.vert)) * Quaternion.FromToRotation(Vector3.forward, Vector3.right));
         else
             p.animations.PlayBugBlastParticles(Quaternion.LookRotation(new Vector2(p.inputs.horz, p.inputs.vert)) * Quaternion.FromToRotation(Vector3.up, Vector3.right));

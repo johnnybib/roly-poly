@@ -5,6 +5,7 @@ using UnityEngine;
 public class SaveStation : MonoBehaviour
 {
     public GameObject saveText;
+    public bool isMain = true;
     void Awake()
     {
         saveText.SetActive(false);
@@ -24,10 +25,20 @@ public class SaveStation : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+
         GameObject other = collider.gameObject;
         if (other.CompareTag("Player"))
         {
             PlayerController p = other.GetComponentInParent<PlayerController>();
+
+            if (!isMain)
+            {
+                if (p.abilities.abilities.egg.unlocked)
+                {
+                    return;
+                }
+            }
+
             if (p.abilities.abilities.egg.unlocked)
             {
                 p.PlayerWin();
