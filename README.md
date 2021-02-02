@@ -19,6 +19,13 @@ Windows: https://drive.google.com/file/d/1rEcqgu_7OLWf9DuhvigSJGv_xzjiQlfz/view?
 
 Mac: https://drive.google.com/file/d/123vw-aPo3_gioFpyEKVUKxPZ1bgs5IyG/view?usp=sharing
 
+## Running the Game on Windows
+- Download the zip
+- Unzip the folder
+- Run Roly Poly.exe
+- If Windows gives a security warning, you can press *more info* and then *run anyway* to run the game.
+
+
 ## Authors
 
 Isabella Pilz - Art 
