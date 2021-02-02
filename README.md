@@ -28,12 +28,12 @@ Mac: https://drive.google.com/file/d/123vw-aPo3_gioFpyEKVUKxPZ1bgs5IyG/view?usp=
 
 ## Authors
 
-Isabella Pilz - Art 
-James Graham-Hu - Coding and Map Building
-Robert Graham-Hu - Coding
-Matthew Hu - Map Design and Map Building
-Marcus Hum - Art and UI
-Kelly Zheng - Music
+- Isabella Pilz - Art 
+- James Graham-Hu - Coding and Map Building
+- Robert Graham-Hu - Coding
+- Matthew Hu - Map Design and Map Building
+- Marcus Hum - Art and UI
+- Kelly Zheng - Music
 
 
 ## Screenshots
