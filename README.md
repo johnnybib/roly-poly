@@ -10,6 +10,7 @@ It’s hard being a bug. It’s even harder being a bug that needs to retrieve y
 ## Controls
 
 Arrow Keys- Move
+
 Shift - Toggle Ball
 
 
