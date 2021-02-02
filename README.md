@@ -14,7 +14,9 @@ Shift - Toggle Ball
 
 
 ## Build
-https://drive.google.com/file/d/1rEcqgu_7OLWf9DuhvigSJGv_xzjiQlfz/view?usp=sharing
+Windows: https://drive.google.com/file/d/1rEcqgu_7OLWf9DuhvigSJGv_xzjiQlfz/view?usp=sharing
+
+Mac: https://drive.google.com/file/d/123vw-aPo3_gioFpyEKVUKxPZ1bgs5IyG/view?usp=sharing
 
 ## Authors
 
